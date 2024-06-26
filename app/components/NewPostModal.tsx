@@ -9,13 +9,31 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const handlePost = () => {
-    // 포스트 작성 로직 추가
-    console.log('Title:', title);
-    console.log('Content:', content);
-    // onClose 호출
-    onClose();
-  };
+  const handlePost = async () => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,  // JWT 토큰이 필요하다면 이렇게 추가하세요
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Post created:', data);
+      onClose();  // Post 성공 후 모달 닫기
+    } else {
+      throw new Error('Something went wrong while posting data');
+    }
+  } catch (error) {
+    console.error('Failed to create post:', error);
+  }
+};
 
   if (!show) {
     return null;

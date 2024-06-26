@@ -17,7 +17,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
 
     setErrors({ email: '', password: '', nickname: '' }); // Reset errors
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/accounts/sign-up/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/sign-up/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

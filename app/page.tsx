@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch('/api/posts'); // API 엔드포인트에 맞게 수정
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`); // API 엔드포인트에 맞게 수정
         const data = await response.json();
         setPosts(data);
       } catch (error) {
