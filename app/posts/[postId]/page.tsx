@@ -1,8 +1,12 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import PostDetail from '../../components/PostDetail';
+import TeamSidebar from '../../components/TeamSidebar';
+import Sidebar from '../../components/Sidebar';
 
 interface Post {
+  id: number;
   team: string;
   date: string;
   user: string;
@@ -10,8 +14,9 @@ interface Post {
   likes: string;
 }
 
-export default function PostDetail() {
-  const { postId } = useParams();
+export default function PostPage({ params }: { params: { postId: string } }) {
+  const router = useRouter();
+  const { postId } = params;
   const [post, setPost] = useState<Post | null>(null);
 
   useEffect(() => {
@@ -30,15 +35,25 @@ export default function PostDetail() {
     }
   }, [postId]);
 
-  if (!post) return <div>Loading...</div>;
+  const handleClosePostDetail = () => {
+    router.push('/');
+  };
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
-      <h1 className="text-2xl font-bold">{post.team}</h1>
-      <p className="text-gray-500">{post.date}</p>
-      <p className="text-gray-700">{post.user}</p>
-      <p className="text-lg my-4">{post.content}</p>
-      <p className="text-red-500">❤️ {post.likes}</p>
+    <div className="flex w-full">
+      <div className="w-1/5">
+        <TeamSidebar />
+      </div>
+      <div className="w-3/5 px-4">
+        <PostDetail postId={post.id} onClose={handleClosePostDetail} />
+      </div>
+      <div className="w-1/5">
+        <Sidebar />
+      </div>
     </div>
   );
 }

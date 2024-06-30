@@ -1,39 +1,39 @@
 import React, { useState } from 'react';
+import { Post } from '../types';
+import apiCall from '../utils/api';
 
 interface NewPostModalProps {
   show: boolean;
   onClose: () => void;
+  onNewPost: (post: Post) => void;
 }
 
-const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose }) => {
+const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const handlePost = async () => {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,  // JWT 토큰이 필요하다면 이렇게 추가하세요
-      },
-      body: JSON.stringify({
-        title: title,
-        content: content
-      })
-    });
+    try {
+      const response = await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: title,
+          content: content,
+        }),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Post created:', data);
-      onClose();  // Post 성공 후 모달 닫기
-    } else {
-      throw new Error('Something went wrong while posting data');
+      if (response.ok) {
+        onClose();
+      } else {
+        throw new Error('Something went wrong while posting data');
+      }
+    } catch (error) {
+      console.error('Failed to create post:', error);
     }
-  } catch (error) {
-    console.error('Failed to create post:', error);
-  }
-};
+  };
 
   if (!show) {
     return null;

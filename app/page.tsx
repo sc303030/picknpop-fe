@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import PostCard from './components/PostCard';
-import PostDetail from './components/PostDetail';
 import Sidebar from './components/Sidebar';
 import TeamSidebar from './components/TeamSidebar';
 
@@ -16,7 +16,7 @@ interface Post {
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -33,11 +33,7 @@ export default function Home() {
   }, []);
 
   const handlePostClick = (postId: number) => {
-    setSelectedPostId(postId);
-  };
-
-  const handleClosePostDetail = () => {
-    setSelectedPostId(null);
+    router.push(`/posts/${postId}`);
   };
 
   return (
@@ -46,25 +42,21 @@ export default function Home() {
         <TeamSidebar />
       </div>
       <div className="w-3/5 px-4">
-        {selectedPostId ? (
-          <PostDetail postId={selectedPostId} onClose={handleClosePostDetail} />
-        ) : (
-          posts.map((post) => (
-            <div 
-              key={post.id} 
-              onClick={() => handlePostClick(post.id)} 
-              className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-            >
-              <PostCard
-                team={post.team}
-                date={post.date}
-                user={post.user}
-                content={post.content}
-                likes={post.likes}
-              />
-            </div>
-          ))
-        )}
+        {posts.map((post) => (
+          <div
+            key={post.id}
+            onClick={() => handlePostClick(post.id)}
+            className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+          >
+            <PostCard
+              team={post.team}
+              date={post.date}
+              user={post.user}
+              content={post.content}
+              likes={post.likes}
+            />
+          </div>
+        ))}
       </div>
       <div className="w-1/5">
         <Sidebar />

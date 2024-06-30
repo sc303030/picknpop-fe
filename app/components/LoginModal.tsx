@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { isTokenExpired, refreshAccessToken } from '../utils/token';
 
 interface LoginModalProps {
   show: boolean;
@@ -28,6 +29,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
 
       const data = await response.json();
       localStorage.setItem('token', data.access);
+      localStorage.setItem('refresh_token', data.refresh); // Refresh token 저장
       alert('로그인 성공');
       onLoginSuccess();
       onClose();
@@ -39,6 +41,28 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
       }
     }
   };
+
+  useEffect(() => {
+    const checkTokenExpiry = async () => {
+      const token = localStorage.getItem('token');
+      const refreshToken = localStorage.getItem('refresh_token');
+      if (isTokenExpired(token) && refreshToken) {
+        try {
+          await refreshAccessToken(refreshToken);
+        } catch (error) {
+          console.error(error);
+          localStorage.removeItem('token');
+          localStorage.removeItem('refresh_token');
+          setErrorMessage('세션이 만료되었습니다. 다시 로그인해주세요.');
+          onClose();
+        }
+      }
+    };
+
+    if (show) {
+      checkTokenExpiry();
+    }
+  }, [show]);
 
   if (!show) {
     return null;
@@ -71,11 +95,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
         >
           로그인 하기
         </button>
-        {/*<div className="mt-4">*/}
-        {/*  <button className="bg-red-500 text-white w-full py-2 rounded">*/}
-        {/*    Continue with Google*/}
-        {/*  </button>*/}
-        {/*</div>*/}
       </div>
     </div>
   );
