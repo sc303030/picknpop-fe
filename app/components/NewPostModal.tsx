@@ -20,12 +20,14 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: title,
-          content: content,
+          title,
+          content,
         }),
       });
 
       if (response.ok) {
+        const newPost = await response.json();
+        onNewPost(newPost);
         onClose();
       } else {
         throw new Error('Something went wrong while posting data');

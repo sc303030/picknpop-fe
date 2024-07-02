@@ -1,18 +1,20 @@
-'use client'; // 클라이언트 컴포넌트로 설정
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
 import NewPostModal from './NewPostModal';
+import { usePostContext } from '../contexts/PostContext';
+import { Post } from '../types';
 
 const Header: React.FC = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showNewPostModal, setShowNewPostModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { addPost } = usePostContext();
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인합니다.
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
@@ -52,6 +54,11 @@ const Header: React.FC = () => {
     setIsLoggedIn(false);
   };
 
+  const handleNewPost = (newPost: Post) => {
+    addPost(newPost);
+    setShowNewPostModal(false);
+  };
+
   return (
     <header className="bg-white shadow">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -75,7 +82,7 @@ const Header: React.FC = () => {
       </div>
       <SignupModal show={showSignupModal} onClose={handleCloseSignupModal} />
       <LoginModal show={showLoginModal} onClose={handleCloseLoginModal} onLoginSuccess={handleLoginSuccess} />
-      <NewPostModal show={showNewPostModal} onClose={handleCloseNewPostModal} />
+      <NewPostModal show={showNewPostModal} onClose={handleCloseNewPostModal} onNewPost={handleNewPost} />
     </header>
   );
 };

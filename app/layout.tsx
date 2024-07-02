@@ -2,6 +2,7 @@ import './globals.css';
 import type { ReactNode } from 'react';
 import Head from 'next/head';
 import Header from './components/Header';
+import { PostProvider } from './contexts/PostContext';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,10 +13,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
-        <Header />
-        <main className="container mx-auto px-4 py-6 flex">
-          {children}
-        </main>
+        <PostProvider>
+          <Header />
+          <main className="container mx-auto px-4 py-6 flex">
+            {children}
+          </main>
+        </PostProvider>
       </body>
     </html>
   );
