@@ -10,6 +10,13 @@ interface Post {
   likes: string;
 }
 
+interface Comment {
+  id: number;
+  author: string;
+  message: string;
+  created_at: string;
+}
+
 interface PostDetailProps {
   postId: number;
   onClose: () => void;
@@ -17,6 +24,8 @@ interface PostDetailProps {
 
 const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
   const [post, setPost] = useState<Post | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState<string>('');
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -29,8 +38,45 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
       }
     };
 
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${postId}/comments`);
+        const data = await response.json();
+        console.log('Fetched comments:', data); // Add this line
+        if (Array.isArray(data)) {
+          setComments(data);
+        } else {
+          console.error('Comments API did not return an array');
+        }
+      } catch (error) {
+        console.error('Failed to fetch comments', error);
+      }
+    };
+
     fetchPost();
+    fetchComments();
   }, [postId]);
+
+  const handleAddComment = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: newComment }),
+      });
+      if (response.ok) {
+        const newCommentData = await response.json();
+        setComments([newCommentData, ...comments]);
+        setNewComment('');
+      } else {
+        console.error('Failed to post comment');
+      }
+    } catch (error) {
+      console.error('Failed to post comment', error);
+    }
+  };
 
   if (!post) return <div>Loading...</div>;
 
@@ -50,7 +96,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
           ❤️ {post.likes}
         </button>
       </div>
-      <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="bg-gray-100 p-4 rounded-lg mb-4">
         <h3 className="text-lg font-bold mb-2">What do you think?</h3>
         <div className="flex space-x-2 mb-4">
           <button className="bg-gray-200 p-2 rounded-lg">👍 Upvote</button>
@@ -60,13 +106,27 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
           <button className="bg-gray-200 p-2 rounded-lg">😡 Angry</button>
           <button className="bg-gray-200 p-2 rounded-lg">😢 Sad</button>
         </div>
-        <div>
+        <div className="flex">
           <input
             type="text"
             placeholder="Add a comment..."
             className="w-full p-2 border border-gray-300 rounded-lg"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
           />
+          <button onClick={handleAddComment} className="bg-blue-500 text-white p-2 rounded-lg ml-2">
+            Submit
+          </button>
         </div>
+      </div>
+      <div>
+        <h3 className="text-lg font-bold mb-2">Comments</h3>
+        {comments.map((comment) => (
+          <div key={comment.id} className="bg-gray-100 p-4 rounded-lg mb-2">
+            <div className="text-sm text-gray-500 mb-1">{comment.author} • {new Date(comment.created_at).toLocaleString()}</div>
+            <div>{comment.message}</div>
+          </div>
+        ))}
       </div>
       <button onClick={onClose} className="text-blue-500 mt-4">Back to list</button>
     </div>

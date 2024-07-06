@@ -8,3 +8,10 @@ export interface Post {
   content: string;
   likes: string;
 }
+
+interface Comment {
+  id: number;
+  author: string;
+  message: string;
+  created_at: string;
+}
