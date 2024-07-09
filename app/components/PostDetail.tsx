@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import apiCall from "@/app/utils/api";
 
 interface Post {
   id: number;
@@ -40,9 +41,8 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
 
     const fetchComments = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${postId}/comments`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/comments/posts/${postId}`);
         const data = await response.json();
-        console.log('Fetched comments:', data); // Add this line
         if (Array.isArray(data)) {
           setComments(data);
         } else {
@@ -59,7 +59,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
 
   const handleAddComment = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${postId}/comments`, {
+      const response = await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/comments/posts/${postId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
