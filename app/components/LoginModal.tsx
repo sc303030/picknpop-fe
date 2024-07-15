@@ -8,7 +8,7 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -19,7 +19,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (!response.ok) {
@@ -77,8 +77,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
         <input
           type="email"
           placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
         />
         <input

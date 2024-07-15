@@ -6,16 +6,16 @@ interface SignupModalProps {
 }
 
 const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const [terms, setTerms] = useState(false);
-  const [errors, setErrors] = useState({ email: '', password: '', nickname: '' });
+  const [errors, setErrors] = useState({ username: '', password: '', nickname: '' });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    setErrors({ email: '', password: '', nickname: '' }); // Reset errors
+    setErrors({ username: '', password: '', nickname: '' }); // Reset errors
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/sign-up/`, {
       method: 'POST',
@@ -23,7 +23,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
         nickname,
         terms,
@@ -53,17 +53,17 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
         <h2 className="text-2xl mb-4">픽앤팝 회원 가입하기</h2>
         <p className="mb-4">환영합니다!</p>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">이메일</label>
+          <label htmlFor="username" className="block text-sm font-medium text-gray-700">이메일</label>
           <input
             type="email"
-            id="email"
+            id="username"
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
             placeholder="이메일을 입력하세요"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
             required
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+          {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
 
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mt-4">비밀번호</label>
           <input
