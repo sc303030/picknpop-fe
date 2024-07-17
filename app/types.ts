@@ -15,3 +15,9 @@ interface Comment {
   message: string;
   created_at: string;
 }
+
+export interface Team {
+  id: number;
+  name: string;
+  emblem: string;
+}

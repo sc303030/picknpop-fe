@@ -1,16 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import { Team } from '../types';
+
 const TeamSidebar: React.FC = () => {
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/teams/`);
+        const data = await response.json();
+        setTeams(data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch teams');
+        setLoading(false);
+      }
+    };
+
+    fetchTeams();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div className="bg-white shadow rounded-lg p-4">
       <h2 className="text-lg font-semibold mb-4">팀</h2>
       <ul className="space-y-2">
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">1. 원주 DB</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">2. 서울 삼성</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">3. 창원 LG</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">4. 수원 KT</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">5. 고양 캐롯</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">6. 서울 SK</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">7. 전주 KCC</a></li>
-        <li><a href="#" className="text-gray-600 hover:text-gray-800">8. 울산 모비스</a></li>
+        {teams.map((team,index) => (
+          <li key={team.id}>
+            <a href="#" className="text-gray-600 hover:text-gray-800">{index+1}. {team.name}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );
