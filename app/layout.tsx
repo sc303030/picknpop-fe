@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <PostProvider>
           <Header />
-          <main className="container mx-auto px-4 py-6 flex">
+          <main className="container mx-auto px-4 py-6 flex bg-custom-gray">
             {children}
           </main>
         </PostProvider>

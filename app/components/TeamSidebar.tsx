@@ -31,13 +31,14 @@ const TeamSidebar: React.FC = () => {
   }
 
   return (
-    <div className="bg-white shadow rounded-lg p-4">
+    <div className="p-4">
       <h2 className="text-lg font-semibold mb-4">팀</h2>
       <ul className="space-y-2">
         {teams.map((team,index) => (
-          <li key={team.id}>
-            <a href="#" className="text-gray-600 hover:text-gray-800">{index+1}. {team.name}</a>
-          </li>
+            <li key={team.id} className="flex items-center space-x-2">
+              <img src={team.emblem} alt={team.name} style={{width: '30px', height: '30px'}}/>
+              <a href="#" className="text-gray-600 hover:text-gray-800">{team.name}</a>
+            </li>
         ))}
       </ul>
     </div>
