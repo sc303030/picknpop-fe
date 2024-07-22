@@ -21,3 +21,10 @@ export interface Team {
   name: string;
   emblem: string;
 }
+
+
+export interface NewPostModalProps {
+  show: boolean;
+  onClose: () => void;
+  onNewPost: (post: Post) => void;
+}
