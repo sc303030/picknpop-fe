@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Team } from '../types';
 
 const TeamSidebar: React.FC = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -30,15 +32,23 @@ const TeamSidebar: React.FC = () => {
     return <div>{error}</div>;
   }
 
+  const handleTeamClick = (teamId: number) => {
+    router.push(`/teams/${teamId}/posts`);
+  };
   return (
     <div className="p-4">
       <h2 className="text-lg font-semibold mb-4">팀</h2>
       <ul className="space-y-2">
-        {teams.map((team,index) => (
-            <li key={team.id} className="flex items-center space-x-2">
-              <img src={team.emblem} alt={team.name} style={{width: '30px', height: '30px'}}/>
-              <a href="#" className="text-gray-600 hover:text-gray-800">{team.name}</a>
-            </li>
+        {teams.map((team) => (
+          <li key={team.id} className="flex items-center space-x-2">
+            <img src={team.emblem} alt={team.name} style={{ width: '30px', height: '30px' }} />
+            <a
+              onClick={() => handleTeamClick(team.id)}
+              className="text-gray-600 hover:text-gray-800 cursor-pointer"
+            >
+              {team.name}
+            </a>
+          </li>
         ))}
       </ul>
     </div>

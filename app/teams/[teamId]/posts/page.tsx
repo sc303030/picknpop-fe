@@ -1,20 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import PostCard from './components/PostCard';
-import Sidebar from './components/Sidebar';
-import TeamSidebar from './components/TeamSidebar';
-import { usePostContext } from './contexts/PostContext';
+import { useEffect, useState } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import PostCard from '../../../components/PostCard';
+import Sidebar from '../../../components/Sidebar';
+import TeamSidebar from '../../../components/TeamSidebar';
+import { Post } from '../../../types';
 
-export default function Page() {
-  const { posts, setPosts } = usePostContext();
+export default function PostsByTeam() {
+  const [posts, setPosts] = useState<Post[]>([]);
   const router = useRouter();
+  const { teamId } = useParams(); // useParams로 teamId 가져오기
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/teams/${teamId}/posts`);
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -22,8 +23,10 @@ export default function Page() {
       }
     };
 
-    fetchPosts();
-  }, [setPosts]);
+    if (teamId) {
+      fetchPosts();
+    }
+  }, [teamId]); // teamId가 변경될 때마다 호출
 
   const handlePostClick = (postId: number) => {
     router.push(`/posts/${postId}`);
