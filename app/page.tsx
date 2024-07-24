@@ -44,7 +44,7 @@ export default function Page() {
             <PostCard
               team={post.team}
               date={post.date}
-              user={post.user}
+              user={post.author.username}
               content={post.content}
               likes={post.likes}
             />

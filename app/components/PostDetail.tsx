@@ -1,27 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import apiCall from "@/app/utils/api";
+import {PostDetailProps, Post, Comment} from "@/app/types";
 
-interface Post {
-  id: number;
-  team: string;
-  date: string;
-  user: string;
-  content: string;
-  likes: string;
-}
-
-interface Comment {
-  id: number;
-  author: string;
-  message: string;
-  created_at: string;
-}
-
-interface PostDetailProps {
-  postId: number;
-  onClose: () => void;
-}
 
 const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -87,7 +68,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
           {post.team}
         </div>
         <div className="text-sm text-gray-500">
-          <span>{post.user}</span> • <span>{post.date}</span>
+          <span>{post.author.username}</span> • <span>{post.date}</span>
         </div>
       </div>
       <div className="text-xl font-semibold mb-2">{post.content}</div>

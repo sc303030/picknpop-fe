@@ -4,12 +4,18 @@ export interface Post {
   id: number;
   team: string;
   date: string;
-  user: string;
   content: string;
   likes: string;
+  author: User;
 }
 
-interface Comment {
+export interface PostDetailProps {
+  postId: number;
+  onClose: () => void;
+}
+
+
+export interface Comment {
   id: number;
   author: string;
   message: string;
@@ -27,4 +33,18 @@ export interface NewPostModalProps {
   show: boolean;
   onClose: () => void;
   onNewPost: (post: Post) => void;
+}
+
+export interface PostCardProps {
+    team: string,
+    date: string,
+    user: string,
+    content: string,
+    likes: string
+}
+
+export interface User {
+  username: string;
+  nickname: string;
+  avatar?: string | null;
 }

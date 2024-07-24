@@ -1,10 +1,5 @@
-interface PostCardProps {
-    team: string,
-    date: string,
-    user: string,
-    content: string,
-    likes: string
-}
+import {PostCardProps} from "@/app/types";
+
 
 const PostCard: React.FC<PostCardProps> = ({
                                                team,
