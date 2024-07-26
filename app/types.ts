@@ -36,15 +36,13 @@ export interface NewPostModalProps {
 }
 
 export interface PostCardProps {
-    team: string,
     date: string,
-    user: string,
+    user: User,
     content: string,
     likes: string
 }
 
 export interface User {
-  username: string;
   nickname: string;
-  avatar?: string | null;
+  avatar?: string;
 }

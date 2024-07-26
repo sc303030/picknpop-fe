@@ -42,9 +42,8 @@ export default function Page() {
             className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg"
           >
             <PostCard
-              team={post.team}
               date={post.date}
-              user={post.author.username}
+              user={post.author}
               content={post.content}
               likes={post.likes}
             />

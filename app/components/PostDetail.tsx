@@ -64,11 +64,13 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
   return (
     <div className="bg-white shadow rounded-lg p-4 mb-4">
       <div className="flex items-center space-x-4 mb-4">
-        <div className="bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold">
-          {post.team}
-        </div>
+        <img
+            src={post.author.avatar}
+            alt={`${post.author.nickname}'s avatar`}
+            className="w-8 h-8 rounded-full"
+        />
         <div className="text-sm text-gray-500">
-          <span>{post.author.username}</span> • <span>{post.date}</span>
+          <span>{post.author.nickname}</span> • <span>{post.date}</span>
         </div>
       </div>
       <div className="text-xl font-semibold mb-2">{post.content}</div>

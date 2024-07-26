@@ -2,7 +2,6 @@ import {PostCardProps} from "@/app/types";
 
 
 const PostCard: React.FC<PostCardProps> = ({
-                                               team,
                                                date,
                                                user,
                                                content,
@@ -11,12 +10,13 @@ const PostCard: React.FC<PostCardProps> = ({
     return (
         <div className="bg-white shadow rounded-lg p-4 mb-4">
             <div className="flex items-center space-x-4 mb-4">
-                <div
-                    className="bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold">
-                    {team}
-                </div>
+                <img
+                    src={user.avatar}
+                    alt={`${user.nickname}'s avatar`}
+                    className="w-8 h-8 rounded-full"
+                />
                 <div className="text-sm text-gray-500">
-                    <span>{user}</span> • <span>{date}</span>
+                    <span>{user.nickname}</span> • <span>{date}</span>
                 </div>
             </div>
             <div className="text-lg font-semibold mb-2">{content}</div>
