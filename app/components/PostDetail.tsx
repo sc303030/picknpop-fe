@@ -60,12 +60,12 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
   };
 
   if (!post) return <div>Loading...</div>;
-
+  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${post.author.avatar}`;
   return (
     <div className="bg-white shadow rounded-lg p-4 mb-4">
       <div className="flex items-center space-x-4 mb-4">
         <img
-            src={post.author.avatar}
+            src={avatarUrl}
             alt={`${post.author.nickname}'s avatar`}
             className="w-8 h-8 rounded-full"
         />

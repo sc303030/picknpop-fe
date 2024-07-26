@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import PostCard from '../../../components/PostCard';
 import Sidebar from '../../../components/Sidebar';
 import TeamSidebar from '../../../components/TeamSidebar';
-import { Post } from '../../../types';
+import {Post} from "@/app/types";
 
 export default function PostsByTeam() {
   const [posts, setPosts] = useState<Post[]>([]);

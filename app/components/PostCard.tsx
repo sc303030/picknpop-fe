@@ -7,11 +7,13 @@ const PostCard: React.FC<PostCardProps> = ({
                                                content,
                                                likes
                                            }) => {
+    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${user.avatar}`;
+
     return (
         <div className="bg-white shadow rounded-lg p-4 mb-4">
             <div className="flex items-center space-x-4 mb-4">
                 <img
-                    src={user.avatar}
+                    src={avatarUrl}
                     alt={`${user.nickname}'s avatar`}
                     className="w-8 h-8 rounded-full"
                 />
