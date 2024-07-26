@@ -45,9 +45,8 @@ export default function PostsByTeam() {
             className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg"
           >
             <PostCard
-              team={post.team}
               date={post.date}
-              user={post.user}
+              user={post.author}
               content={post.content}
               likes={post.likes}
             />
