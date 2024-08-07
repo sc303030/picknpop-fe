@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {{experimental: {appDir: boolean}}} */
 const nextConfig = {
   experimental: {
     appDir: false,
