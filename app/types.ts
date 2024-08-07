@@ -3,7 +3,8 @@
 export interface Post {
   id: number;
   team: string;
-  date: string;
+  created_at: string;
+  title: string,
   content: string;
   likes: string;
   author: User;
@@ -38,6 +39,7 @@ export interface NewPostModalProps {
 export interface PostCardProps {
     date: string,
     user: User,
+  title: string,
     content: string,
     likes: string
 }

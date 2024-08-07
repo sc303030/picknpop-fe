@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import apiCall from "@/app/utils/api";
 import {PostDetailProps, Post, Comment} from "@/app/types";
+import {format, parseISO} from "date-fns";
+import {ko} from "date-fns/locale";
 
 
 const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
@@ -61,6 +63,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
 
   if (!post) return <div>Loading...</div>;
   const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${post.author.avatar}`;
+  const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
   return (
     <div className="bg-white shadow rounded-lg p-4 mb-4">
       <div className="flex items-center space-x-4 mb-4">
@@ -70,7 +73,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
             className="w-8 h-8 rounded-full"
         />
         <div className="text-sm text-gray-500">
-          <span>{post.author.nickname}</span> • <span>{post.date}</span>
+          <span>{post.author.nickname} {formattedDate}</span>
         </div>
       </div>
       <div className="text-xl font-semibold mb-2">{post.content}</div>

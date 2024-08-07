@@ -1,0 +1,28 @@
+/* PostCard.module.css */
+.profile-detail-wrapper {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 0;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.post-detail-wrapper {
+  grid-column-gap: 28px;
+  grid-row-gap: 28px;
+  pointer-events: auto;
+  background-color: #fff;
+  border-radius: 17px;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: auto;
+  padding: 20px;
+  display: flex;
+}

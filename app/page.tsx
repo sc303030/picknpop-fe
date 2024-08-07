@@ -39,11 +39,11 @@ export default function Page() {
           <div
             key={`${post.id}-${index}`}
             onClick={() => handlePostClick(post.id)}
-            className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg"
           >
             <PostCard
-              date={post.date}
+              date={post.created_at}
               user={post.author}
+              title={post.title}
               content={post.content}
               likes={post.likes}
             />
