@@ -39,7 +39,7 @@ export interface NewPostModalProps {
 export interface PostCardProps {
     date: string,
     user: User,
-  title: string,
+    title: string,
     content: string,
     likes: string
 }
