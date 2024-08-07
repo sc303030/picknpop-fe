@@ -17,6 +17,10 @@ export async function refreshAccessToken(refreshToken: string): Promise<string> 
   });
 
   if (!response.ok) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    alert('세션이 만료되었습니다');
+    window.location.href = '/';
     throw new Error('Failed to refresh access token');
   }
 
