@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/app/postCard.module.css';
+import styles from './PostCard.module.css';
 import { PostCardProps } from "@/app/types";
 import {format, parseISO} from 'date-fns';
 import { ko } from 'date-fns/locale';
