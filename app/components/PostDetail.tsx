@@ -61,7 +61,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
     }
   };
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return ;
   const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${post.author.avatar}`;
   const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
   return (

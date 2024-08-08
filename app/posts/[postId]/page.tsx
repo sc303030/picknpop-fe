@@ -32,7 +32,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
   };
 
   if (!post) {
-    return <div>Loading...</div>;
+    return ;
   }
 
   return (

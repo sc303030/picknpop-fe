@@ -8,8 +8,8 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        'custom-gray': '#f5f5f5',
+      maxWidth: {
+        'custom': '1280px',
       },
     },
   },

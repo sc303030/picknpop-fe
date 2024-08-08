@@ -31,10 +31,10 @@ export default function Page() {
 
   return (
     <div className="flex w-full">
-      <div className="w-1/5">
+      <div className="hidden md:w-1/5 md:block">
         <TeamSidebar />
       </div>
-      <div className="w-3/5 px-4">
+      <div className="w-full md:w-3/5 px-4">
         {posts.map((post, index) => (
           <div
             key={`${post.id}-${index}`}
@@ -50,7 +50,7 @@ export default function Page() {
           </div>
         ))}
       </div>
-      <div className="w-1/5">
+      <div className="hidden md:w-1/5 md:block">
         <Sidebar />
       </div>
     </div>
