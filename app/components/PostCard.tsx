@@ -30,7 +30,7 @@ const PostCard: React.FC<PostCardProps> = ({
                     </div>
                 </div>
             </div>
-            <div className={`cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-black rounded-2xl bg-white ${styles['post-detail-wrapper']}`}>
+            <div className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-gray-400 rounded-2xl bg-white mt-2.5 flex p-4 shadow">
                 <div>
                     <div>
                         <div className="post-detail-link-div block mb-2">

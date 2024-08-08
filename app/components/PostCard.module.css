@@ -9,15 +9,3 @@
   align-items: center;
   display: flex;
 }
-
-.post-detail-wrapper {
-  flex-flow: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 95%;
-  margin-top: 10px;
-  margin-left: 0;
-  margin-right: auto;
-  padding: 20px;
-  display: flex;
-}
