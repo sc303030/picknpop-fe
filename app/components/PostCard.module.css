@@ -11,11 +11,6 @@
 }
 
 .post-detail-wrapper {
-  grid-column-gap: 28px;
-  grid-row-gap: 28px;
-  pointer-events: auto;
-  background-color: #fff;
-  border-radius: 17px;
   flex-flow: row;
   justify-content: flex-start;
   align-items: center;

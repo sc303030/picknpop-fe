@@ -18,7 +18,7 @@ export interface PostDetailProps {
 
 export interface Comment {
   id: number;
-  author: string;
+  author: User;
   message: string;
   created_at: string;
 }
@@ -46,5 +46,18 @@ export interface PostCardProps {
 
 export interface User {
   nickname: string;
-  avatar?: string;
+  avatar: string;
+}
+
+export interface PostHeaderProps {
+  post: Post;
+}
+
+export interface CommentBoxProps {
+  onSubmit: (comment: string) => void;
+}
+
+export interface CommentsSectionProps {
+  comments: Comment[];
+  onAddComment: (comment: string) => void;
 }

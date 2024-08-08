@@ -30,7 +30,7 @@ const PostCard: React.FC<PostCardProps> = ({
                     </div>
                 </div>
             </div>
-            <div className={`cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-black ${styles['post-detail-wrapper']}`}>
+            <div className={`cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-black rounded-2xl bg-white ${styles['post-detail-wrapper']}`}>
                 <div>
                     <div>
                         <div className="post-detail-link-div block mb-2">
@@ -41,12 +41,12 @@ const PostCard: React.FC<PostCardProps> = ({
                         </div>
                     </div>
                 </div>
-                <main className="reaction-group-div flex justify-between items-center mt-4">
+                <div className="reaction-group-div flex justify-between items-center mt-4">
                     <div data-ms-content="members" className="reaction-wrapper-member flex items-center text-gray-500">
                         <span className="text-block">❤️</span>
                         <span className="reaction-count ml-2">{likes}</span>
                     </div>
-                </main>
+                </div>
             </div>
         </div>
     );
