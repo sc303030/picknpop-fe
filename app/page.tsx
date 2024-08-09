@@ -34,7 +34,7 @@ export default function Page() {
       <div className="hidden md:w-1/5 md:block">
         <TeamSidebar />
       </div>
-      <div className="w-full md:w-3/5 px-4">
+      <div className="w-full md:w-3/5 py-4">
         {posts.map((post, index) => (
           <div
             key={`${post.id}-${index}`}

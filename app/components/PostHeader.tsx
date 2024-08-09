@@ -7,7 +7,7 @@ import EmotionButtons from "@/app/components/EmotionButtons";
 
 
 const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
-  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${post.author.avatar}`;
+  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}${post.author.avatar}`;
   const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
 
   return (

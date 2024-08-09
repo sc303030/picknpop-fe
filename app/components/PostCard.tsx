@@ -10,11 +10,11 @@ const PostCard: React.FC<PostCardProps> = ({
     content,
     likes
 }) => {
-    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${user.avatar}`;
+    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}${user.avatar}`;
     const formattedDate = format(parseISO(date), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
 
     return (
-        <div className="p-4 mb-4">
+        <div className="mb-4">
             <div className={styles['profile-detail-wrapper']}>
                 <div
                     style={{ backgroundImage: `url(${avatarUrl})` }}
@@ -30,7 +30,7 @@ const PostCard: React.FC<PostCardProps> = ({
                     </div>
                 </div>
             </div>
-            <div className="cursor-pointer transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-gray-400 rounded-2xl bg-white mt-2.5 flex p-4 shadow">
+            <div className="cursor-pointer transition-transform duration-200 border border-gray-300 rounded-2xl bg-white mt-2.5 flex p-4 shadow hover:shadow-2xl hover:-translate-y-[2px]">
                 <div>
                     <div>
                         <div className="post-detail-link-div block mb-2">
