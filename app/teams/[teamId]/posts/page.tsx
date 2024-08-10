@@ -33,11 +33,11 @@ export default function PostsByTeam() {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="w-1/5">
+    <>
+      <div className="hidden lg:w-full lg:block">
         <TeamSidebar />
       </div>
-      <div className="w-3/5 px-4">
+      <div className="w-full py-4">
         {posts.map((post, index) => (
           <div
             key={`${post.id}-${index}`}
@@ -53,9 +53,9 @@ export default function PostsByTeam() {
           </div>
         ))}
       </div>
-      <div className="w-1/5">
+      <div className="hidden lg:w-full lg:block">
         <Sidebar />
       </div>
-    </div>
+    </>
   );
 }

@@ -11,6 +11,9 @@ const config: Config = {
       maxWidth: {
         'custom': '1280px',
       },
+      gridTemplateColumns: {
+        'container': '2.5fr 7fr 3fr',
+      },
     },
   },
   plugins: [],

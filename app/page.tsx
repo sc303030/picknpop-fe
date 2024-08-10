@@ -30,11 +30,11 @@ export default function Page() {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="hidden md:w-1/5 md:block">
+    <>
+      <div className="hidden lg:w-full lg:block">
         <TeamSidebar />
       </div>
-      <div className="w-full md:w-3/5 py-4">
+      <div className="w-full py-4">
         {posts.map((post, index) => (
           <div
             key={`${post.id}-${index}`}
@@ -50,9 +50,9 @@ export default function Page() {
           </div>
         ))}
       </div>
-      <div className="hidden md:w-1/5 md:block">
+      <div className="hidden lg:w-full lg:block">
         <Sidebar />
       </div>
-    </div>
+    </>
   );
 }

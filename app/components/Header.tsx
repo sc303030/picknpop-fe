@@ -66,7 +66,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow min-h-14 flex items-center">
+    <div className="bg-white shadow h-[52px] flex items-center">
       <div className="container mx-auto flex justify-between items-center">
         <h1
             className="text-2xl font-bold cursor-pointer"
@@ -101,7 +101,7 @@ const Header: React.FC = () => {
       <SignupModal show={showSignupModal} onClose={handleCloseSignupModal}/>
       <LoginModal show={showLoginModal} onClose={handleCloseLoginModal} onLoginSuccess={handleLoginSuccess} />
       <NewPostModal show={showNewPostModal} onClose={handleCloseNewPostModal} onNewPost={handleNewPost} />
-    </header>
+    </div>
   );
 };
 
