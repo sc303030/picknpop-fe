@@ -3,16 +3,23 @@ import type { ReactNode } from 'react';
 import Head from 'next/head';
 import Header from './components/Header';
 import { PostProvider } from './contexts/PostContext';
+import localFont from 'next/font/local'
 
+const pretendard = localFont({
+  src: '../static/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: "45 920",
+  variable: "--font-pretendard",
+})
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="kr" className={`${pretendard.variable}`}>
       <Head>
         <title>Forum</title>
         <meta name="description" content="A simple forum application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>
+      <body className={pretendard.className}>
         <PostProvider>
           <Header />
           <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-16 lg:grid-cols-container">
