@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Team } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCaretRight} from '@fortawesome/free-solid-svg-icons';
 
 const TeamSidebar: React.FC = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -25,7 +28,7 @@ const TeamSidebar: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div></div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -35,28 +38,52 @@ const TeamSidebar: React.FC = () => {
   const handleTeamClick = (teamId: number) => {
     router.push(`/teams/${teamId}/posts`);
   };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="p-1 mt-8 bg-white rounded-lg">
-      <h2 className="text-sm font-semibold mb-4">팀</h2>
-      <ul className="text-sm">
-        {teams.map((team) => {
-          const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
+      <div
+        className="flex gap-1 items-center cursor-pointer my-2 pl-2"
+        onClick={toggleDropdown}
+      >
+        <FontAwesomeIcon
+          icon={faCaretRight}
+          className={`w-6 h-6 transition-all duration-100 ease-out ${isOpen ? 'rotate-90' : ''}`}
+          style={{ color: '#c4c4c4' }}
+        />
+        <div className="text-sm font-medium pl-2">팀</div>
+      </div>
+      {isOpen && (
+        <ul className="text-sm origin-top">
+          {teams.map((team) => {
+            const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
 
-          return (
-              <li key={team.id} className="flex items-center space-x-2">
-                <div className="w-8 h-8">
-                  <img src={emblemUrl} alt={team.name} className="w-full h-full object-contain"/>
+            return (
+              <li
+                key={team.id}
+                className="transition-all duration-100 ease-out bg-transparent flex items-center py-1.5 px-2 rounded-xl hover:bg-gray-100 cursor-pointer"
+              >
+                <div className="w-8 h-8 mr-2 bg-gray-100 rounded-lg drop-shadow-md">
+                  <img
+                    src={emblemUrl}
+                    alt={team.name}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <a
-                    onClick={() => handleTeamClick(team.id)}
-                    className="text-gray-600 hover:text-gray-800 cursor-pointer"
+                  onClick={() => handleTeamClick(team.id)}
+                  className="hover:text-gray-800 cursor-pointer text-xs"
                 >
                   {team.name}
                 </a>
               </li>
-          );
-        })}
-      </ul>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };

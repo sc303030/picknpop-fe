@@ -29,7 +29,10 @@ export interface Team {
   emblem: string;
 }
 
-
+export interface TeamDropdownProps {
+  teams: Team[];
+  handleTeamClick: (teamId: number) => void;
+}
 export interface NewPostModalProps {
   show: boolean;
   onClose: () => void;
