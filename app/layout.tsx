@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={pretendard.className}>
         <PostProvider>
           <Header />
-          <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-16 lg:grid-cols-container">
+          <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-x-16 lg:grid-cols-container relative z-0">
             {children}
           </div>
         </PostProvider>

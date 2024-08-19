@@ -14,6 +14,12 @@ const config: Config = {
       gridTemplateColumns: {
         'container': '2.5fr 7fr 3fr',
       },
+      boxShadow: {
+        'header': '0px 1px 0px rgb(234, 234, 237)',
+      },
+      screens: {
+        '1160': '1160px',
+      },
     },
   },
   plugins: [],

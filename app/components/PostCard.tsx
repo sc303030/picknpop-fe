@@ -19,17 +19,17 @@ const PostCard: React.FC<PostCardProps> = ({
                     style={{ backgroundImage: `url(${avatarUrl})` }}
                     className="w-8 h-8 rounded-full bg-cover bg-center"
                 ></div>
-                <div className="text-sm">
+                <div className="text-sm font-medium">
                     <div className="flex items-center text-black-500">
                         <span>{user.nickname}</span>
-                        <strong className="bold-text ml-2">님이 포스트를 올렸습니다.</strong>
+                        <span>님이 포스트를 올렸습니다.</span>
                     </div>
                     <div className="text-xs">
                         <span className="upload_date text-gray-500">{formattedDate}</span>
                     </div>
                 </div>
             </div>
-            <div className="cursor-pointer transition-transform duration-200 border border-gray-300 rounded-2xl bg-white mt-2.5 flex p-4 shadow hover:shadow-2xl hover:-translate-y-[2px]">
+            <div className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px]">
                 <div>
                     <div>
                         <div className="block mb-2">

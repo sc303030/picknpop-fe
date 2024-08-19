@@ -66,18 +66,19 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="bg-white shadow h-[52px] flex items-center">
-      <div className="container mx-auto flex justify-between items-center">
+    <div className="transform transition-transform duration-300 ease-out translate-y-0 block shadow-header sticky top-0 z-100 w-full bg-white/75 border-b-0">
+      <div className="mx-auto px-4 w-auto max-w-custom h-[52px] min-h-12 flex items-center justify-between relative">
         <h1
-            className="text-2xl font-bold cursor-pointer"
+            className="text-2xl font-medium cursor-pointer"
             onClick={handleLogoClick}
         >
           픽앤팝
         </h1>
-        <nav className="space-x-4 flex items-center">
+        <div className="space-x-4 flex items-center">
           <a href="#" className="text-gray-600 hover:text-gray-800">About</a>
           <a href="#" className="text-gray-600 hover:text-gray-800">Contact</a>
           <span className="mx-2 text-gray-300">|</span>
+          <div className="flex flex-row">
           {isLoggedIn ? (
               <>
                 <button onClick={handleOpenNewPostModal}
@@ -89,14 +90,15 @@ const Header: React.FC = () => {
                 </button>
               </>
           ) : (
-              <>
+              < >
                 <button onClick={handleOpenLoginModal} className="text-orange-500 hover:text-orange-700">로그인</button>
                 <button onClick={handleOpenSignupModal}
                         className="bg-orange-500 text-white px-3 py-2 rounded-full hover:bg-orange-700">회원가입
                 </button>
               </>
           )}
-        </nav>
+        </div>
+        </div>
       </div>
       <SignupModal show={showSignupModal} onClose={handleCloseSignupModal}/>
       <LoginModal show={showLoginModal} onClose={handleCloseLoginModal} onLoginSuccess={handleLoginSuccess} />

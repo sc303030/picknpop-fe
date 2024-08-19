@@ -44,7 +44,7 @@ const TeamSidebar: React.FC = () => {
   };
 
   return (
-    <div className="p-1 mt-8 bg-white rounded-lg">
+    <div className="p-1 mt-8 bg-white rounded-2xl">
       <div
         className="flex gap-1 items-center cursor-pointer my-2 pl-2"
         onClick={toggleDropdown}
