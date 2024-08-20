@@ -31,10 +31,6 @@ export default function Page() {
 
   return (
     <>
-      <div className="hidden lg:block lg:w-[190px] 1160:w-[224px] relative">
-        <TeamSidebar />
-      </div>
-      <div className="min-w-[660px] py-4 relative">
         {posts.map((post, index) => (
           <div
             key={`${post.id}-${index}`}
@@ -49,10 +45,6 @@ export default function Page() {
             />
           </div>
         ))}
-      </div>
-      <div className="hidden lg:min-w-[250px] lg:block">
-        <Sidebar />
-      </div>
     </>
   );
 }

@@ -12,10 +12,22 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
 
   return (
       <>
-          <div className="flex items-center space-x-4 mb-4">
-              <img src={avatarUrl} alt={`${post.author.nickname}'s avatar`} className="w-8 h-8 rounded-full"/>
-              <div className="text-sm text-gray-500">
-                  <span>{post.author.nickname} {formattedDate}</span>
+          <div className="flex items-center my-4">
+              <div className="flex flex-col w-full">
+                  <div className="flex items-center relative justify-between">
+                      <div className="flex w-full">
+                          <div
+                              style={{backgroundImage: `url(${avatarUrl})`}}
+                              className="w-10 h-10 rounded-full bg-cover bg-center mr-3"
+                          ></div>
+                          <div className="flex flex-col text-sm">
+                              <div className="flex items-center my-auto">
+                                  <span className="text-lg font-medium text-black-500 mr-2">{post.author.nickname}</span>
+                                  <span className="text-gray-500"> · {formattedDate}</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
           <div className="bg-white shadow rounded-2xl p-4 mb-4">
@@ -23,7 +35,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
               <div className="flex justify-between items-center mb-4">
                   {post.content}
               </div>
-              <EmotionButtons />
+              <EmotionButtons/>
           </div>
       </>
   );

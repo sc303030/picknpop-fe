@@ -37,15 +37,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
   return (
     <>
-      <div className="hidden lg:w-full lg:block">
-        <TeamSidebar />
-      </div>
-      <div className="w-full py-4">
-        <PostDetail postId={post.id} onClose={handleClosePostDetail} />
-      </div>
-      <div className="hidden lg:w-full lg:block">
-        <Sidebar />
-      </div>
+      <PostDetail postId={post.id} onClose={handleClosePostDetail} />
     </>
   );
 }

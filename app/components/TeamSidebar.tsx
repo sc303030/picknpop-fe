@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Team } from '../types';
@@ -28,7 +29,7 @@ const TeamSidebar: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   if (error) {

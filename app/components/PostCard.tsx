@@ -2,6 +2,7 @@ import React from 'react';
 import { PostCardProps } from "@/app/types";
 import {format, parseISO} from 'date-fns';
 import { ko } from 'date-fns/locale';
+import {formatRelativeDate} from "@/app/utils/formatRelativeDate";
 const PostCard: React.FC<PostCardProps> = ({
     date,
     user,
@@ -10,26 +11,30 @@ const PostCard: React.FC<PostCardProps> = ({
     likes
 }) => {
     const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}${user.avatar}`;
-    const formattedDate = format(parseISO(date), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
-
+    const relativeDate = formatRelativeDate(date);
     return (
         <div className="mb-4 mt-8">
-            <div className="text-sm flex">
-                <div
-                    style={{ backgroundImage: `url(${avatarUrl})` }}
-                    className="w-8 h-8 rounded-full bg-cover bg-center"
-                ></div>
-                <div className="text-sm font-medium">
-                    <div className="flex items-center text-black-500">
-                        <span>{user.nickname}</span>
-                        <span>님이 포스트를 올렸습니다.</span>
-                    </div>
-                    <div className="text-xs">
-                        <span className="upload_date text-gray-500">{formattedDate}</span>
+            <div className="flex flex-col w-full">
+                <div className="flex items-center relative justify-between">
+                    <div className="flex w-full">
+                        <div
+                            style={{backgroundImage: `url(${avatarUrl})`}}
+                            className="w-10 h-10 rounded-full bg-cover bg-center mr-2"
+                        ></div>
+                        <div className="flex flex-col text-sm">
+                            <div className="flex items-center">
+                                <span className="text-black-500 font-semibold mr-0.5">{user.nickname}</span>
+                                <span className="text-gray-800">님이 포스트를 올렸습니다.</span>
+                            </div>
+                            <div className="text-xs">
+                                <span className="text-gray-500">{relativeDate}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px]">
+            <div
+                className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px]">
                 <div>
                     <div>
                         <div className="block mb-2">
