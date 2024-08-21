@@ -1,5 +1,7 @@
 // types.ts
 
+import React from "react";
+
 export interface Post {
   id: number;
   team: string;
@@ -64,4 +66,16 @@ export interface CommentBoxProps {
 export interface CommentsSectionProps {
   comments: Comment[];
   onAddComment: (comment: string) => void;
+}
+
+export interface ModalLayoutProps {
+  show: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+export interface LoginModalProps {
+  show: boolean;
+  onClose: () => void;
+  onLoginSuccess: () => void;
 }

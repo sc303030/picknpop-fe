@@ -83,18 +83,18 @@ const Header: React.FC = () => {
           {isLoggedIn ? (
               <>
                 <button onClick={handleOpenNewPostModal}
-                        className="text-orange-500 border border-orange-500 rounded-full px-3 py-2 hover:bg-orange-500 hover:text-white">새
+                        className="ml-2 p-3 bg-white border border-orange-500 text-sm rounded-full font-normal text-center w-auto cursor-pointer leading-4 text-orange-500 hover:bg-orange-500 hover:text-white">새
                   포스트
                 </button>
                 <button onClick={handleLogout}
-                        className="bg-orange-500 text-white px-3 py-2 rounded-full hover:bg-orange-700">로그아웃
+                        className="bg-orange-500 text-white ml-2 p-3 border border-orange-500 text-sm rounded-full font-normal text-center w-auto cursor-pointer leading-4 hover:text-orange-500 hover:bg-white">로그아웃
                 </button>
               </>
           ) : (
               < >
-                <button onClick={handleOpenLoginModal} className="text-orange-500 hover:text-orange-700">로그인</button>
+                <button onClick={handleOpenLoginModal} className="ml-2 p-3 bg-white border border-orange-500 text-sm rounded-full font-normal text-orange-500 text-center w-auto cursor-pointer leading-4 hover:bg-orange-500 hover:text-white">로그인</button>
                 <button onClick={handleOpenSignupModal}
-                        className="bg-orange-500 text-white px-3 py-2 rounded-full hover:bg-orange-700">회원가입
+                        className="bg-orange-500 text-white ml-2 p-3 border border-orange-500 text-sm rounded-full font-normal text-center w-auto cursor-pointer leading-4 hover:text-orange-500 hover:bg-white">회원가입
                 </button>
               </>
           )}

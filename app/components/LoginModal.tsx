@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ModalLayout from './ModalLayout';
 import { isTokenExpired, refreshAccessToken } from '../utils/token';
+import {LoginModalProps} from "@/app/types";
 
-interface LoginModalProps {
-  show: boolean;
-  onClose: () => void;
-  onLoginSuccess: () => void;
-}
 
 const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }) => {
   const [username, setUsername] = useState('');
@@ -64,39 +61,31 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
     }
   }, [show]);
 
-  if (!show) {
-    return null;
-  }
-
   return (
-    <div className="h-screen fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose}></div>
-      <div className="relative bg-white p-8 rounded shadow-md w-96 z-10">
-        <button onClick={onClose} className="absolute top-2 right-2 text-gray-600">X</button>
-        <h2 className="text-2xl font-bold mb-4">로그인</h2>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
-        />
-        <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
-        />
-        {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
-        <button
-          onClick={handleLogin}
-          className="bg-blue-500 text-white w-full py-2 rounded"
-        >
-          로그인 하기
-        </button>
-      </div>
-    </div>
+    <ModalLayout show={show} onClose={onClose}>
+      <h2 className="text-2xl font-bold mb-4">로그인</h2>
+      <input
+        type="email"
+        placeholder="Enter your email"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
+      />
+      <input
+        type="password"
+        placeholder="Enter your password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
+      />
+      {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
+      <button
+        onClick={handleLogin}
+        className="bg-blue-500 text-white w-full py-2 rounded"
+      >
+        로그인 하기
+      </button>
+    </ModalLayout>
   );
 };
 

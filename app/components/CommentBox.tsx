@@ -22,8 +22,8 @@ const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl my-8">
-      <div className="flex items-start space-x-4 h-10">
-        <div className="flex-shrink-0">
+      <div className="flex items-start h-10">
+        <div className="mr-3">
           <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
             F
           </div>
