@@ -3,9 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import PostCard from '../../../components/PostCard';
-import Sidebar from '../../../components/Sidebar';
-import TeamSidebar from '../../../components/TeamSidebar';
-import {Post} from "@/app/types";
+import { Post } from '@/app/types';
 
 export default function PostsByTeam() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -34,28 +32,21 @@ export default function PostsByTeam() {
 
   return (
     <>
-      <div className="hidden lg:w-full lg:block">
-        <TeamSidebar />
-      </div>
-      <div className="w-full py-4">
-        {posts.map((post, index) => (
-          <div
-            key={`${post.id}-${index}`}
-            onClick={() => handlePostClick(post.id)}
-          >
-            <PostCard
-              date={post.created_at}
-              user={post.author}
-              title={post.title}
-              content={post.content}
-              likes={post.likes}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="hidden lg:w-full lg:block">
-        <Sidebar />
-      </div>
+      {posts.map((post, index) => (
+        <div
+          key={`${post.id}-${index}`}
+          onClick={() => handlePostClick(post.id)}
+          className="cursor-pointer"
+        >
+          <PostCard
+            date={post.created_at}
+            user={post.author}
+            title={post.title}
+            content={post.content}
+            likes={post.likes}
+          />
+        </div>
+      ))}
     </>
   );
 }

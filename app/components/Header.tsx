@@ -52,6 +52,7 @@ const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
+    console.log('삭제')
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
@@ -66,7 +67,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="transform transition-transform duration-300 ease-out translate-y-0 block shadow-header sticky top-0 z-100 w-full bg-white/75 border-b-0">
+    <div className="transform transition-transform duration-300 ease-out translate-y-0 block shadow-sm sticky top-0 z-100 w-full bg-white/75 border-b-0">
       <div className="mx-auto px-4 w-auto max-w-custom h-[52px] min-h-12 flex items-center justify-between relative">
         <h1
             className="text-2xl font-medium cursor-pointer"

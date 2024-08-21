@@ -58,32 +58,37 @@ const TeamSidebar: React.FC = () => {
         <div className="text-sm font-medium pl-2">팀</div>
       </div>
       {isOpen && (
-        <ul className="text-sm origin-top">
-          {teams.map((team) => {
-            const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
+        <div className="text-sm origin-top">
+          <div className="flex flex-col w-full box-border">
+            <div className="flex flex-col box-border">
+              {teams.map((team) => {
+              const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
 
-            return (
-              <li
-                key={team.id}
-                className="transition-all duration-100 ease-out bg-transparent flex items-center py-1.5 px-2 rounded-xl hover:bg-gray-100 cursor-pointer"
-              >
-                <div className="w-8 h-8 mr-2 bg-gray-100 rounded-lg drop-shadow-md">
-                  <img
-                    src={emblemUrl}
-                    alt={team.name}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <a
-                  onClick={() => handleTeamClick(team.id)}
-                  className="hover:text-gray-800 cursor-pointer text-xs"
+              return (
+                <div
+                  key={team.id}
+                  className="transition-all duration-100 ease-out bg-transparent flex items-center py-1.5 px-2 rounded-xl hover:bg-gray-100 cursor-pointer"
+                  onClick={(e) => {
+                  e.preventDefault();
+                  handleTeamClick(team.id);
+                }}
                 >
-                  {team.name}
-                </a>
-              </li>
+                  <div className="w-8 h-8 mr-2 bg-gray-100 rounded-lg drop-shadow-md"
+                  style={{
+                    backgroundImage: `url(${emblemUrl})`,
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}>
+                  </div>
+                  <div className="hover:text-gray-800 cursor-pointer text-xs">{team.name}</div>
+              </div>
             );
           })}
-        </ul>
+            </div>
+          </div>
+
+        </div>
       )}
     </div>
   );

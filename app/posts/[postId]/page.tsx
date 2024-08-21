@@ -2,8 +2,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PostDetail from '../../components/PostDetail';
-import TeamSidebar from '../../components/TeamSidebar';
-import Sidebar from '../../components/Sidebar';
 import {Post} from "@/app/types";
 
 export default function PostPage({ params }: { params: { postId: string } }) {

@@ -15,7 +15,7 @@ const PostCard: React.FC<PostCardProps> = ({
     return (
         <div className="mb-4 mt-8">
             <div className="flex flex-col w-full">
-                <div className="flex items-center relative justify-between">
+                <div className="flex items-center justify-between">
                     <div className="flex w-full">
                         <div
                             style={{backgroundImage: `url(${avatarUrl})`}}

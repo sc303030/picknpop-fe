@@ -3,8 +3,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PostCard from './components/PostCard';
-import Sidebar from './components/Sidebar';
-import TeamSidebar from './components/TeamSidebar';
 import { usePostContext } from './contexts/PostContext';
 
 export default function Page() {

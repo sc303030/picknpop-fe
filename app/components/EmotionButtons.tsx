@@ -1,32 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import apiCall from "@/app/utils/api";
 
 interface Emoji {
-  id: string;
+  id: number;
   label: string;
   count: number;
   voted: boolean;
 }
 
-const emojis: Emoji[] = [
-  { id: 'like', label: '👍', count: 0, voted: false },
-  { id: 'funny', label: '😂', count: 0, voted: false },
-  { id: 'love', label: '😍', count: 0, voted: false },
-  { id: 'surprised', label: '😮', count: 0, voted: false },
-  { id: 'angry', label: '😡', count: 0, voted: false },
-  { id: 'sad', label: '😢', count: 2, voted: false },
-];
+const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
+  const [emojiStates, setEmojiStates] = useState<Emoji[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-const EmotionButtons: React.FC = () => {
-  const [emojiStates, setEmojiStates] = useState(emojis);
+  useEffect(() => {
+    // 로그인 상태 확인
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
 
-  const handleVote = (id: string) => {
-    setEmojiStates(prevState =>
-      prevState.map(emoji =>
-        emoji.id === id
-          ? { ...emoji, voted: !emoji.voted, count: emoji.voted ? emoji.count - 1 : emoji.count + 1 }
-          : emoji
-      )
-    );
+    const fetchEmojis = async () => {
+      try {
+        const emotionTypesResponse = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/emotions/types`);
+        const emotionTypesData = await emotionTypesResponse.json();
+
+        const countsResponse = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/emotions/posts/${postId}/counts`);
+        const countsData = await countsResponse.json();
+
+        const userStatusResponse = isAuthenticated
+          ? await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/emotions/posts/${postId}/user_emotions`)
+          : null;
+
+        const userStatusData = userStatusResponse ? await userStatusResponse.json() : [];
+
+        const initialEmojis: Emoji[] = emotionTypesData.map((emotion: { name: string; id: number }) => {
+          const countData = countsData.find((count: { emotion_type_id: number }) => count.emotion_type_id === emotion.id);
+          const userStatus = userStatusData.find((status: { emotion_type_id: number }) => status.emotion_type_id === emotion.id);
+
+          return {
+            id: emotion.id,
+            label: getEmojiLabel(emotion.name),
+            count: countData ? countData.count : 0,
+            voted: userStatus ? userStatus.voted : false,
+          };
+        });
+
+        setEmojiStates(initialEmojis);
+      } catch (error) {
+        console.error('Error fetching emotions:', error);
+      }
+    };
+
+    fetchEmojis();
+  }, [postId, isAuthenticated]);
+
+  const handleVote = async (id: number) => {
+    if (!isAuthenticated) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/emotions/posts/${postId}/toggle_emotion`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ emotion_type_id: id }),
+      });
+
+      const data = await response.json();
+
+      setEmojiStates(prevState =>
+        prevState.map(emoji =>
+          emoji.id === id
+            ? {
+                ...emoji,
+                voted: data.action === 'added',
+                count: data.action === 'added' ? emoji.count + 1 : emoji.count - 1,
+              }
+            : emoji
+        )
+      );
+    } catch (error) {
+      console.error('Error toggling emotion:', error);
+    }
+  };
+
+  const getEmojiLabel = (name: string): string => {
+    switch (name) {
+      case 'like':
+        return '👍';
+      case 'funny':
+        return '😂';
+      case 'love':
+        return '😍';
+      case 'surprised':
+        return '😮';
+      case 'angry':
+        return '😡';
+      case 'sad':
+        return '😢';
+      default:
+        return '❓';
+    }
   };
 
   return (
@@ -34,7 +114,9 @@ const EmotionButtons: React.FC = () => {
       {emojiStates.map((emoji) => (
         <div
           key={emoji.id}
-          className={`h-7 relative inline-flex items-center justify-center px-1 rounded-full cursor-pointer ${emoji.voted ? 'border pr-2 border-blue-500 bg-blue-100 font-semibold' : 'border-gray-300 bg-gray-100'} ${emoji.count === 0 ? 'w-7' : 'pr-2'}`}
+          className={`h-7 inline-flex items-center justify-center px-1 rounded-full cursor-pointer ${
+            emoji.voted ? 'border pr-2 border-blue-500 bg-blue-100 font-semibold' : 'border-gray-300 bg-gray-100'
+          } ${emoji.count === 0 ? 'w-7' : 'pr-2'}`}
           onClick={() => handleVote(emoji.id)}
         >
           <span className="text-sm flex items-center justify-center">{emoji.label}</span>

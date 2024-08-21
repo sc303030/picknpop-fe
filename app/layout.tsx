@@ -24,14 +24,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={pretendard.className}>
           <PostProvider>
               <Header/>
-              <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-x-16 relative z-0 lg:grid-cols-container lg:row-start-auto">
-                  <div className="hidden lg:block lg:w-[190px] 1160:w-full relative">
+              <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-x-16 z-0 lg:grid-cols-container lg:row-start-auto">
+                  <div className="hidden lg:block lg:w-[190px] 1160:w-full">
                       <TeamSidebar/>
                   </div>
-                  <div className="py-4 relative min-w-0 lg:row-start-auto row-start-2">
+                  <div className="py-4 min-w-0 lg:row-start-auto row-start-2">
                       {children}
                   </div>
-                  <div className="relative lg:w-full lg:row-start-auto row-start-1">
+                  <div className="lg:w-full lg:row-start-auto row-start-1">
                       <Sidebar/>
                   </div>
               </div>

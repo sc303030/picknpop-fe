@@ -14,7 +14,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
       <>
           <div className="flex items-center my-4">
               <div className="flex flex-col w-full">
-                  <div className="flex items-center relative justify-between">
+                  <div className="flex items-center justify-between">
                       <div className="flex w-full">
                           <div
                               style={{backgroundImage: `url(${avatarUrl})`}}
@@ -35,7 +35,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
               <div className="flex justify-between items-center mb-4">
                   {post.content}
               </div>
-              <EmotionButtons/>
+              <EmotionButtons postId={post.id}/>
           </div>
       </>
   );

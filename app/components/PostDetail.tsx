@@ -64,7 +64,6 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
     <>
       <PostHeader post={post} />
       <CommentsSection comments={comments} onAddComment={handleAddComment} />
-      <button onClick={onClose} className="text-blue-500 mt-4">Back to list</button>
     </>
   );
 };

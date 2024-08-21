@@ -66,7 +66,7 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="h-screen fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose}></div>
       <div className="relative bg-white p-8 rounded shadow-md w-full max-w-3xl z-10">
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-600">X</button>
