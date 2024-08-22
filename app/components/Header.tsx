@@ -18,6 +18,7 @@ const Header: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    window.location.reload();
   };
 
   const handleLogoClick = () => {

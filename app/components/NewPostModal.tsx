@@ -49,10 +49,11 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
       if (response.ok) {
         const newPost = await response.json();
         onNewPost(newPost);
-        setTitle(''); // 제목 초기화
-        setContent(''); // 내용 초기화
-        setSelectedTeam(''); // 팀 선택 초기화
+        setTitle('');
+        setContent('');
+        setSelectedTeam('')
         onClose();
+        window.location.reload();
       } else {
         throw new Error('Something went wrong while posting data');
       }

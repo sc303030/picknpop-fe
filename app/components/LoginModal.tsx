@@ -26,10 +26,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
 
       const data = await response.json();
       localStorage.setItem('token', data.access);
-      localStorage.setItem('refresh_token', data.refresh); // Refresh token 저장
-      alert('로그인 성공');
+      localStorage.setItem('refresh_token', data.refresh);
       onLoginSuccess();
       onClose();
+      window.location.reload();
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
