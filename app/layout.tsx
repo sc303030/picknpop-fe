@@ -28,10 +28,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ModalProvider>
             <Header />
             <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-x-16 z-0 lg:grid-cols-container">
-              <div className="hidden lg:block lg:w-[190px] 1160:w-full">
+              <div className="lg:row-start-auto lg:w-[185px] 1160:w-full row-start-2">
                 <TeamSidebar />
               </div>
-              <div className="py-4 min-w-0 lg:row-start-auto row-start-2">
+              <div className="py-4 min-w-0 lg:row-start-auto row-start-3">
                 {children}
               </div>
               <div className="lg:w-full lg:row-start-auto row-start-1">
