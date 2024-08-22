@@ -114,14 +114,14 @@ const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
       {emojiStates.map((emoji) => (
         <div
           key={emoji.id}
-          className={`h-7 inline-flex items-center justify-center px-1 rounded-full cursor-pointer ${
-            emoji.voted ? 'border pr-2 border-blue-500 bg-blue-100 font-semibold' : 'border-gray-300 bg-gray-100'
-          } ${emoji.count === 0 ? 'w-7' : 'pr-2'}`}
+          className={`h-7 inline-flex items-center justify-center rounded-full cursor-pointer ${
+            emoji.voted ? 'border border-blue-500 bg-blue-100 font-semibold' : 'border-gray-300 bg-gray-100'
+          } ${emoji.count === 0 ? 'w-7' : 'px-2'}`}
           onClick={() => handleVote(emoji.id)}
         >
           <span className="text-sm flex items-center justify-center">{emoji.label}</span>
           {emoji.count > 0 && (
-            <span className="ml-2 text-blue-600 text-sm">{emoji.count}</span>
+            <span className={`${emoji.voted ? 'text-blue-600' : 'text-black'} ml-2 text-sm`}>{emoji.count}</span>
           )}
         </div>
       ))}
