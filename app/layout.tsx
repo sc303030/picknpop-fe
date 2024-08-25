@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PostProvider>
           <ModalProvider>
             <Header />
-            <div className="max-w-custom m-auto px-4 py-2 grid grid-cols-1 gap-x-16 z-0 lg:grid-cols-container relative">
+            <div className="max-w-full m-auto px-4 py-2 grid grid-cols-1 gap-x-14 z-0 lg:max-w-[95%] lg:grid-cols-container relative">
               <div className="lg:row-start-auto lg:w-[185px] 1160:w-full row-start-2 relative h-full">
                 <TeamSidebar />
               </div>

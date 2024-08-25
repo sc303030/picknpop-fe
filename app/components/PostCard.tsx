@@ -37,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({
                 </div>
             </div>
             <div
-                className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px] w-[97%] ml-auto">
+                className="cursor-pointer transition-transform duration-200 rounded-2xl bg-white mt-2.5 flex p-4  w-[97%] ml-auto border-gray-400 border hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px]">
                 <div>
                     <div>
                         <div className="block mb-2">

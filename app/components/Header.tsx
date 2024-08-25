@@ -53,9 +53,9 @@ const Header: React.FC = () => {
     <div
       className={`transform transition-transform duration-300 ease-out backdrop-blur-sm ${
         hideHeader ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'
-      } shadow-sm sticky top-0 z-[1] w-full bg-white/75 border-b-0`}
+      } shadow-sm sticky top-0 z-[1] w-full bg-white/90 border-b-0`}
     >
-      <div className="mx-auto px-4 w-auto max-w-custom h-[52px] min-h-12 flex items-center justify-between relative">
+      <div className="mx-auto px-4 w-auto max-w-full h-[52px] min-h-12 flex items-center justify-between relative lg:max-w-[95%]">
         <h1 className="text-2xl font-medium cursor-pointer" onClick={handleLogoClick}>
           픽앤팝
         </h1>
