@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > 100) {
+      if (scrollTop > 320) {
         setHideHeader(true);
       } else {
         setHideHeader(false);
