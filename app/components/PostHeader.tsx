@@ -3,6 +3,8 @@ import { PostHeaderProps } from '@/app/types';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import EmotionButtons from "@/app/components/EmotionButtons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -16,10 +18,10 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
               <div className="flex flex-col w-full">
                   <div className="flex items-center justify-between">
                       <div className="flex w-full">
-                          <div
-                              style={{backgroundImage: `url(${avatarUrl})`}}
-                              className="w-10 h-10 rounded-full bg-cover bg-center mr-3"
-                          ></div>
+                                                  {post.author.avatar ? (<div
+                            style={{backgroundImage: `url(${avatarUrl})`}}
+                            className="w-10 h-10 rounded-full bg-cover bg-center mr-2"
+                        ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
                           <div className="flex flex-col text-sm">
                               <div className="flex items-center my-auto">
                                   <span className="text-lg font-medium text-black-500 mr-2">{post.author.nickname}</span>

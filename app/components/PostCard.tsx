@@ -1,8 +1,8 @@
 import React from 'react';
 import { PostCardProps } from "@/app/types";
-import {format, parseISO} from 'date-fns';
-import { ko } from 'date-fns/locale';
 import {formatRelativeDate} from "@/app/utils/formatRelativeDate";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 const PostCard: React.FC<PostCardProps> = ({
     date,
     user,
@@ -17,10 +17,11 @@ const PostCard: React.FC<PostCardProps> = ({
             <div className="flex flex-col w-full">
                 <div className="flex items-center justify-between">
                     <div className="flex w-full">
-                        <div
+                        {user.avatar ? (<div
                             style={{backgroundImage: `url(${avatarUrl})`}}
                             className="w-10 h-10 rounded-full bg-cover bg-center mr-2"
-                        ></div>
+                        ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
+
                         <div className="flex flex-col text-sm">
                             <div className="flex items-center">
                                 <span className="text-black-500 font-semibold mr-0.5">{user.nickname}</span>

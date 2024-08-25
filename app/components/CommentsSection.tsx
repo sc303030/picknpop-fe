@@ -10,8 +10,14 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments, onAddCommen
       <CommentBox onSubmit={onAddComment} />
       <div>
         {comments.map((comment) => (
-          <div key={comment.id} className="bg-white shadow p-4 rounded-2xl mb-2">
-            <div className="text-sm text-gray-500 mb-1">
+          <div key={comment.id} className="bg-white shadow p-4 rounded-2xl mb-2 flex flex-col">
+            <div className="flex items-center mb-1.5">
+                <a>
+                    <div></div>
+                </a>
+                <div>
+
+                </div>
               {comment.author.nickname} {new Date(comment.created_at).toLocaleString()}
             </div>
             <div>{comment.message}</div>

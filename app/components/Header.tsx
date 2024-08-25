@@ -1,18 +1,42 @@
 'use client';
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useModalContext } from '@/app/components/ModalProvider';
 
 const Header: React.FC = () => {
   const router = useRouter();
   const { showSignupModal, showLoginModal, showNewPostModal } = useModalContext();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
     }
+  }, []);
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 100) {
+        setHideHeader(true);
+      } else {
+        setHideHeader(false);
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -26,7 +50,11 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="transform transition-transform duration-300 ease-out translate-y-0 block shadow-sm sticky top-0 z-100 w-full bg-white/75 border-b-0">
+    <div
+      className={`transform transition-transform duration-300 ease-out backdrop-blur-sm ${
+        hideHeader ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'
+      } shadow-sm sticky top-0 z-[1] w-full bg-white/75 border-b-0`}
+    >
       <div className="mx-auto px-4 w-auto max-w-custom h-[52px] min-h-12 flex items-center justify-between relative">
         <h1 className="text-2xl font-medium cursor-pointer" onClick={handleLogoClick}>
           픽앤팝

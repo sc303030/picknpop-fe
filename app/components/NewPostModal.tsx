@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Team, NewPostModalProps } from '../types';
 import apiCall from '../utils/api';
 import ModalLayout from './ModalLayout';
+import { usePostContext } from '../contexts/PostContext';
 
 const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [teams, setTeams] = useState<Team[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>('');
+  const { posts, setPosts } = usePostContext();
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -48,12 +50,12 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
 
       if (response.ok) {
         const newPost = await response.json();
+        setPosts([newPost, ...posts]);
         onNewPost(newPost);
         setTitle('');
         setContent('');
-        setSelectedTeam('')
+        setSelectedTeam('');
         onClose();
-        window.location.reload();
       } else {
         throw new Error('Something went wrong while posting data');
       }

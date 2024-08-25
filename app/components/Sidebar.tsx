@@ -1,6 +1,6 @@
 const Sidebar: React.FC = () => {
   return (
-    <div className="mt-8 flex flex-col">
+    <div className="mt-8 sticky top-[100px] flex flex-col">
         <div className="mb-3.5 leading-4 flex justify-between items-center">
             <div className="text-sm font-medium">🔥 실시간 인기글</div>
         </div>
