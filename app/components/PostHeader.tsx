@@ -9,7 +9,7 @@ import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 
 
 const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
-  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}${post.author.avatar}`;
+  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${post.author.avatar}`;
   const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
 
   return (
@@ -20,7 +20,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                       <div className="flex w-full">
                                                   {post.author.avatar ? (<div
                             style={{backgroundImage: `url(${avatarUrl})`}}
-                            className="w-10 h-10 rounded-full bg-cover bg-center mr-2"
+                            className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
                         ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
                           <div className="flex flex-col text-sm">
                               <div className="flex items-center my-auto">

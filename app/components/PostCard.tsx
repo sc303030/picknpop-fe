@@ -10,7 +10,7 @@ const PostCard: React.FC<PostCardProps> = ({
     content,
     likes
 }) => {
-    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}${user.avatar}`;
+    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${user.avatar}`;
     const relativeDate = formatRelativeDate(date);
     return (
         <div className="mb-4 mt-8">
@@ -18,8 +18,10 @@ const PostCard: React.FC<PostCardProps> = ({
                 <div className="flex items-center justify-between">
                     <div className="flex w-full">
                         {user.avatar ? (<div
-                            style={{backgroundImage: `url(${avatarUrl})`}}
-                            className="w-10 h-10 rounded-full bg-cover bg-center mr-2"
+                            style={{
+                                backgroundImage: `url(${avatarUrl})`,
+                              }}
+                            className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
                         ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
 
                         <div className="flex flex-col text-sm">
@@ -35,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({
                 </div>
             </div>
             <div
-                className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px]">
+                className="cursor-pointer transition-transform duration-200 rounded-[18px] bg-white mt-2.5 flex p-4 hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px] lg:rounded-[20px] w-[97%] ml-auto">
                 <div>
                     <div>
                         <div className="block mb-2">
