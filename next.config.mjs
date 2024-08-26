@@ -1,7 +1,7 @@
 /** @type {{experimental: {appDir: boolean}}} */
 const nextConfig = {
   experimental: {
-    appDir: false,
+    appDir: true,
   },
 };
 
