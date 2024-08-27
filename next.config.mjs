@@ -1,8 +1,10 @@
-/** @type {{experimental: {appDir: boolean}}} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-};
+// @ts-check
 
-export default nextConfig;
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  /* config options here */
+}
+
+export default nextConfig
