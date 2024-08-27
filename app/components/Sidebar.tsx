@@ -34,8 +34,8 @@ const Sidebar: React.FC = () => {
       <div className="flex flex-col overflow-hidden p-1 rounded-2xl h-auto bg-white">
         {popularPosts.map((post, index) => (
           <a
-            key={post.id}
-            onClick={() => handlePostClick(post.id)}
+            key={post.post_id}
+            onClick={() => handlePostClick(post.post_id)}
             className="rounded-xl bg-transparent py-1.5 px-2 items-center justify-between cursor-pointer transition-all duration-100 ease-out hover:bg-gray-50"
           >
             <div className="w-full flex flex-row items-center">

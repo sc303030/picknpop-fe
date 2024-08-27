@@ -4,11 +4,11 @@ import React from "react";
 
 
 interface PostBase {
-  id: number;
   title: string,
   content: string;
 }
 export interface Post extends  PostBase{
+  id: number;
   team: string;
   created_at: string;
   likes: string;
@@ -88,5 +88,6 @@ export interface ModalContextProps {
 }
 
 export interface PopularPost extends  PostBase{
+  post_id:number;
   recent_views: number;
 }
