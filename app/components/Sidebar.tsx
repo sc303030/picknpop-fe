@@ -13,7 +13,6 @@ const Sidebar: React.FC = () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/popular`);
         const data = await response.json();
-        console.log(data);
         setPopularPosts(data);
       } catch (error) {
         console.error('Failed to fetch popular posts:', error);
