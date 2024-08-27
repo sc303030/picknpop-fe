@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
           >
             <div className="w-full flex flex-row items-center">
               <div className="mr-2">{index + 1}</div>
-              <div className="text-base font-medium mr-1.5">{post.title}</div>
+              <div className="text-base font-medium mr-1.5 truncate">{post.title}</div>
               <div className="text-sm text-gray-400 truncate">{post.content}</div>
             </div>
           </a>
