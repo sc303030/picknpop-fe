@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import EmotionButtons from "@/app/components/EmotionButtons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {faCircleUser, faEye, faEyeDropperEmpty, faEyeLowVision, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -24,8 +24,11 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                         ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
                           <div className="flex flex-col text-sm">
                               <div className="flex items-center my-auto">
-                                  <span className="text-lg font-medium text-black-500 mr-2">{post.author.nickname}</span>
-                                  <span className="text-gray-500"> · {formattedDate}</span>
+                                  <span
+                                      className="text-lg font-medium text-black-500 mr-2">{post.author.nickname}</span>
+                                  <span className="text-gray-500 mr-1"> · {formattedDate} · </span>
+                                  <FontAwesomeIcon icon={faEye} className="text-gray-500 mr-1"/>
+                                  <span className="text-gray-500">{post.views}</span>
                               </div>
                           </div>
                       </div>

@@ -2,14 +2,18 @@
 
 import React from "react";
 
-export interface Post {
+
+interface PostBase {
   id: number;
-  team: string;
-  created_at: string;
   title: string,
   content: string;
+}
+export interface Post extends  PostBase{
+  team: string;
+  created_at: string;
   likes: string;
   author: User;
+  views: number;
 }
 
 export interface PostDetailProps {
@@ -31,10 +35,6 @@ export interface Team {
   emblem: string;
 }
 
-export interface TeamDropdownProps {
-  teams: Team[];
-  handleTeamClick: (teamId: number) => void;
-}
 export interface NewPostModalProps {
   show: boolean;
   onClose: () => void;
@@ -85,4 +85,8 @@ export interface ModalContextProps {
   showLoginModal: () => void;
   showNewPostModal: () => void;
   closeModals: () => void;
+}
+
+export interface PopularPost extends  PostBase{
+  recent_views: number;
 }
