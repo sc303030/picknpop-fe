@@ -42,7 +42,7 @@ const TeamSidebar: React.FC = () => {
   return (
     <div className="mt-8 sticky top-[100px]">
       <div className="flex gap-1 items-center cursor-pointer my-2 pl-2">
-        <div className="font-medium">팀</div>
+        <div className="text-sm font-medium">🏀 팀</div>
       </div>
       <div className="text-sm origin-top bg-white rounded-2xl">
         <div className="flex flex-row w-full box-border p-1 overflow-x-auto lg:flex-col">
