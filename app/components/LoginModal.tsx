@@ -62,30 +62,93 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
   }, [show]);
 
   return (
-    <ModalLayout show={show} onClose={onClose}>
-      <h2 className="text-2xl font-bold mb-4">로그인</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
-      />
-      <input
-        type="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className={`w-full mb-2 p-2 border rounded ${errorMessage && 'border-red-500'}`}
-      />
-      {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
-      <button
-        onClick={handleLogin}
-        className="bg-blue-500 text-white w-full py-2 rounded"
-      >
-        로그인 하기
-      </button>
-    </ModalLayout>
+      <ModalLayout show={show} onClose={onClose}>
+        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img
+                className="mx-auto h-10 w-auto"
+                src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=600"
+                alt="Your Company"
+                width={40}
+                height={40}
+            />
+          </div>
+
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="space-y-6">
+              <div>
+                <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  이메일
+                  <span className="pl-1 text-red-800">*</span>
+                </label>
+
+                <div className="mt-2">
+                  <input
+                      type="email"
+                      value={username}
+                      autoComplete="email"
+                      required
+                      onChange={(e) => setUsername(e.target.value)}
+                      className={`block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 ${errorMessage && 'border-red-500'}`}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                      htmlFor="password"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    비밀번호
+                    <span className="pl-1 text-red-800">*</span>
+                  </label>
+                  <div className="text-sm">
+                    <a
+                        href="#"
+                        className="font-semibold text-orange-600 hover:text-orange-400"
+                    >
+                      비밀번호 찾기
+                    </a>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <input
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className={`block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 ${errorMessage && 'border-red-500'}`}
+                  />
+                </div>
+              </div>
+              {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
+              <div>
+                <button
+                    onClick={handleLogin}
+                    className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                >
+                  로그인
+                </button>
+              </div>
+            </div>
+
+            <p className="mt-10 text-center text-sm text-gray-500">
+              계정이 필요하신가요?{`  `}
+              <a
+                  href="#"
+                  className="font-semibold leading-6 text-orange-600 hover:text-orange-400"
+              >
+                가입하기
+              </a>
+            </p>
+          </div>
+        </div>
+      </ModalLayout>
   );
 };
 
