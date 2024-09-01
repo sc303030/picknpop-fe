@@ -32,14 +32,10 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
     });
 
     if (response.ok) {
-      // 성공적으로 회원가입이 완료된 경우 처리
-      console.log('회원가입 성공');
       onClose();
     } else {
-      // 실패한 경우 처리
       const data = await response.json();
       setErrors(data);
-      console.error('회원가입 실패', data);
     }
   };
 
