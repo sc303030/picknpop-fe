@@ -41,19 +41,19 @@ const TeamSidebar: React.FC = () => {
 
   return (
     <div className="mt-8 sticky top-[100px]">
-      <div className="flex gap-1 items-center cursor-pointer my-2 pl-2">
+      <div className="flex gap-1 items-center my-2 lg:hidden">
         <div className="text-sm font-medium">🏀 팀</div>
       </div>
-      <div className="text-sm origin-top bg-white rounded-2xl">
+      <div className="text-sm origin-top bg-white rounded-2xl lg:bg-transparent">
         <div className="flex flex-row w-full box-border p-1 overflow-x-auto lg:flex-col">
-          <div className="flex flex-row box-border lg:flex-col">
+          <div className="flex flex-row box-border lg:flex-col lg:mx-auto">
             {teams.map((team) => {
               const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
 
               return (
                 <div
                   key={team.id}
-                  className="transition-all duration-100 ease-out bg-transparent flex items-center p-2 rounded-xl cursor-pointer mr-2 hover:bg-gray-100 lg:mr-0"
+                  className="transition-all duration-100 ease-out bg-transparent flex items-center p-2 rounded-xl cursor-pointer mr-2 hover:bg-gray-100 lg:mr-0 lg:hover:bg-white"
                   onClick={(e) => {
                     e.preventDefault();
                     handleTeamClick(team.id);
