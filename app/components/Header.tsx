@@ -72,14 +72,18 @@ const Header: React.FC = () => {
     router.push('/');
   };
 
+  const ProfileClick = (userId: number) => {
+    router.push(`/profile/${userId}`);
+  };
+
   return (
       <nav className={`transform transition-transform duration-300 ease-out backdrop-blur-sm ${
           hideHeader ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'
       } shadow-sm sticky top-0 z-[1] w-full bg-white/90 border-b-0`}>
-        <div className="mx-auto px-4 w-auto max-w-full h-[52px] min-h-12 lg:max-w-[95%]">
+        <div className="mx-auto px-4 w-auto max-w-full h-[52px] min-h-12 lg:max-w-custom">
           <div className="relative flex h-full items-center justify-between">
             <div className="flex flex-1 items-center sm:items-stretch">
-              <div className="flex flex-shrink-0 items-center">
+              <div className="flex flex-shrink-0 items-center pl-1">
                 <div className="text-2xl font-medium cursor-pointer" onClick={handleLogoClick}>픽앤팝</div>
               </div>
             </div>
@@ -120,6 +124,7 @@ const Header: React.FC = () => {
                             tabIndex={-1}
                         >
                           <button
+                                  onClick={() => ProfileClick(1)}
                                   className="block px-4 py-2 text-sm text-gray-700 w-full text-start hover:bg-gray-100">프로필
                           </button>
                           <button onClick={handleLogout}

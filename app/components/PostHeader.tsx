@@ -21,7 +21,15 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                                                   {post.author.avatar ? (<div
                             style={{backgroundImage: `url(${avatarUrl})`}}
                             className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
-                        ></div>) : (<FontAwesomeIcon icon={faCircleUser} style={{color: "#cececf",fontSize : "2.5rem", marginRight: "0.5rem"}}/> )}
+                        ></div>) : (<svg className="mr-2 w-10 h-10 text-gray-300" viewBox="2.2 2 19.5 19.5"
+                                         fill="currentColor"
+                                         aria-hidden="true">
+                                                      <path
+                                                          fillRule="evenodd"
+                                                          d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                                          clipRule="evenodd"
+                                                      />
+                                                  </svg>)}
                           <div className="flex flex-col text-sm">
                               <div className="flex items-center my-auto">
                                   <span

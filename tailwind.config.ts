@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       maxWidth: {
-        'custom': '1280px',
+        'custom': '1340px',
       },
       gridTemplateColumns: {
         'container': 'minmax(200px, 1fr) 3fr minmax(200px, 1fr)',

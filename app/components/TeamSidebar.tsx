@@ -46,7 +46,7 @@ const TeamSidebar: React.FC = () => {
       </div>
       <div className="text-sm origin-top bg-white rounded-2xl lg:bg-transparent">
         <div className="flex flex-row w-full box-border p-1 overflow-x-auto lg:flex-col">
-          <div className="flex flex-row box-border lg:flex-col lg:mx-auto">
+          <div className="flex flex-row box-border lg:flex-col">
             {teams.map((team) => {
               const emblemUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/${team.emblem}`;
 
