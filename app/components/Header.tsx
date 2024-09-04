@@ -6,6 +6,7 @@ import { useModalContext } from '@/app/components/ModalProvider';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserLarge} from "@fortawesome/free-solid-svg-icons/faUserLarge";
 import {faBell} from "@fortawesome/free-solid-svg-icons";
+import {getCookie, deleteCookie} from "@/app/utils/token";
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const Header: React.FC = () => {
 
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = getCookie('token');
     if (token) {
       setIsLoggedIn(true);
     }
@@ -63,7 +64,7 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    deleteCookie('token');
     setIsLoggedIn(false);
     window.location.reload();
   };

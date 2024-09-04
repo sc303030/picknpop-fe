@@ -45,7 +45,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ post_id: postId, message: comment }), // post_id 추가
+        body: JSON.stringify({ post_id: postId, message: comment }),
       });
       if (response.ok) {
         const newCommentData = await response.json();
@@ -54,7 +54,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
         console.error('Failed to post comment');
       }
     } catch (error) {
-      console.error('Failed to post comment', error);
+      alert("로그인이 필요합니다.");
     }
   };
 

@@ -91,3 +91,10 @@ export interface PopularPost extends  PostBase{
   post_id:number;
   recent_views: number;
 }
+
+export interface Emoji {
+  id: number;
+  label: string;
+  count: number;
+  voted: boolean;
+}

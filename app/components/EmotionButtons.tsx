@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import apiCall from "@/app/utils/api";
+import {getCookie} from "@/app/utils/token";
+import {Emoji} from "@/app/types";
 
-interface Emoji {
-  id: number;
-  label: string;
-  count: number;
-  voted: boolean;
-}
 
 const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
   const [emojiStates, setEmojiStates] = useState<Emoji[]>([]);
@@ -14,7 +10,7 @@ const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
 
   useEffect(() => {
     // 로그인 상태 확인
-    const token = localStorage.getItem('token');
+    const token = getCookie('token');
     if (token) {
       setIsAuthenticated(true);
     } else {
@@ -63,7 +59,7 @@ const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
     }
 
     try {
-      const token = localStorage.getItem('token');
+      const token = getCookie('token');
       const response = await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/emotions/posts/${postId}/toggle_emotion`, {
         method: 'POST',
         headers: {
