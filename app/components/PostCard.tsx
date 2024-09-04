@@ -44,26 +44,26 @@ const PostCard: React.FC<PostCardProps> = ({
                 </div>
             </div>
         </div>
-    <div
-        className="cursor-pointer transition-transform duration-200 rounded-2xl bg-white mt-2.5 flex p-4  w-[97%] ml-auto border-gray-400 border hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px]">
-                <div>
-                    <div>
-                        <div className="block mb-2">
-                            <h2 className="text-2xl font-semibold mb-2">{title}</h2>
-                        </div>
-                        <div className="text-gray-700">
-                            <p>{content}</p>
-                        </div>
+        <div
+            className="cursor-pointer transition-transform duration-200 rounded-2xl bg-white mt-2.5 flex p-5 w-[97%] ml-auto border-gray-400 border hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px]">
+            <div className="flex flex-row">
+                <div className="flex flex-col mr-7">
+                    <div className="block mb-1">
+                        <h2 className="text-2xl font-semibold">{title}</h2>
+                    </div>
+                    <div className="text-gray-700 pl-0.5">
+                        <p>{content}</p>
                     </div>
                 </div>
-                <div className="flex justify-between items-center mt-4">
-                    <div data-ms-content="members" className="flex items-center text-gray-500">
-                        <span className="text-block">❤️</span>
-                        <span className="ml-2">{likes}</span>
+                <div className="flex flex-row justify-between items-center">
+                    <div className="text-sm font-medium flex flex-col items-center bg-[#ededed] rounded-2xl h-14 w-14 mx-auto my-auto">
+                        <div className="mt-auto">❤️</div>
+                        <div className="mb-auto">0</div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     );
 };
 
