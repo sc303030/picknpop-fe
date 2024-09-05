@@ -66,39 +66,51 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
 
   return (
     <ModalLayout show={show} onClose={onClose}>
-      <h2 className="text-2xl font-bold mb-4">새 포스트 작성</h2>
-      <input
-        type="text"
-        placeholder="제목을 입력하세요"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="w-full mb-4 p-2 border rounded"
-      />
-      <textarea
-        placeholder="내용을 입력하세요"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="w-full mb-4 p-2 border rounded"
-        rows={10}
-      ></textarea>
-      <select
-        value={selectedTeam}
-        onChange={(e) => setSelectedTeam(e.target.value)}
-        className="w-full mb-4 p-2 border rounded"
-      >
-        <option value="">팀을 선택하세요</option>
-        {teams.map((team) => (
-          <option key={team.id} value={team.id}>
-            {team.name}
-          </option>
-        ))}
-      </select>
-      <button
-        onClick={handlePost}
-        className="bg-blue-500 text-white w-full py-2 rounded"
-      >
-        기록하기
-      </button>
+      <div className="relative bg-white shadow-md flex flex-col w-full h-full md:rounded-3xl md:h-[570px] md:w-[700px]">
+        <button onClick={onClose} className="absolute top-2 right-2 text-gray-600 text-2xl md:right-[-2.5rem] md:top-0 md:text-white md:h-10 md:w-10 md:text-4xl">X</button>
+        <div className="text-xl text-center px-7 pt-7 pb-3.5 flex flex-col">
+          <strong>게시글 작성</strong>
+          <span className="text-sm text-gray-500">다양한 생각을 공유해주세요!</span>
+        </div>
+        <div className="px-4">
+          <div>
+            <input
+            type="text"
+            placeholder="제목을 입력하세요"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full mb-4 p-2 focus:outline-none"
+            />
+          </div>
+          <div>
+            <textarea
+            placeholder="내용을 입력하세요"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full mb-4 p-2 focus:outline-none"
+            rows={5}
+        ></textarea>
+          </div>
+        </div>
+        <div className="flex flex-col px-8 pb-3.5">
+          <strong className="pb-5">응원팀</strong>
+          <div className="flex flex-wrap gap-4 text-sm justify-start">
+              {teams.map((team) => (
+                  <div key={team.id} className="min-w-28 h-fit border border-black text-center p-2 rounded-2xl cursor-pointer">
+                    {team.name}
+                  </div>
+              ))}
+          </div>
+        </div>
+        <div className="flex flex-row justify-end space-y-1 p-4 border-t border-gray-200">
+          <button
+            onClick={handlePost}
+            className="bg-orange-500 text-white p-2 rounded-xl hover:bg-orange-300"
+        >
+          작성하기
+        </button>
+        </div>
+      </div>
     </ModalLayout>
   );
 };
