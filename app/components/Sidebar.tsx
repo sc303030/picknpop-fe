@@ -3,9 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { PopularPost } from '@/app/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesDown, faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar: React.FC = () => {
   const [popularPosts, setPopularPosts] = useState<PopularPost[]>([]);
+  const [expanded, setExpanded] = useState(false); // 슬라이드 상태 관리
   const router = useRouter();
 
   useEffect(() => {
@@ -26,17 +29,27 @@ const Sidebar: React.FC = () => {
     router.push(`/posts/${postId}`);
   };
 
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <div className="mt-8 sticky top-[100px] flex flex-col">
       <div className="mb-3.5 leading-4 flex justify-between items-center">
         <div className="text-sm font-medium">🔥 실시간 인기글</div>
       </div>
-      <div className="flex flex-col overflow-hidden p-1 rounded-2xl h-auto bg-white">
-        {popularPosts.map((post, index) => (
+      <div
+        className={`flex flex-col overflow-hidden p-1 rounded-2xl bg-white relative transition-[max-height] ease-in-out ${
+          expanded ? 'duration-500 max-h-[500px]' : 'duration-300 max-h-[80px]'
+        } lg:max-h-none lg:h-auto`}
+      >
+        {popularPosts.slice(0, 5).map((post, index) => (
           <a
             key={post.post_id}
             onClick={() => handlePostClick(post.post_id)}
-            className="rounded-xl bg-transparent py-1.5 px-2 items-center justify-between cursor-pointer transition-all duration-100 ease-out hover:bg-gray-50"
+            className={`rounded-xl bg-transparent py-1.5 px-2 items-center justify-between cursor-pointer transition-all duration-100 ease-out hover:bg-gray-50 ${
+              !expanded && index === 1 ? 'backdrop-blur-sm' : ''
+            }`}
           >
             <div className="w-full flex flex-row">
               <div className="mr-2 text-gray-500 pt-0.5">{index + 1}</div>
@@ -47,6 +60,18 @@ const Sidebar: React.FC = () => {
             </div>
           </a>
         ))}
+        <button
+          onClick={toggleExpanded}
+          className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-500 focus:outline-none z-10 lg:hidden"
+        >
+          <FontAwesomeIcon
+            icon={expanded ? faAnglesUp : faAnglesDown}
+            className="transition-all duration-300 animate-bounce text-gray-500"
+          />
+        </button>
+        {!expanded && (
+          <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white via-white/10 to-transparent pointer-events-none backdrop-blur-sm lg:hidden"></div>
+        )}
       </div>
     </div>
   );
