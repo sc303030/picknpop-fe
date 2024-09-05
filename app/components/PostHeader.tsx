@@ -14,14 +14,14 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
 
   return (
       <>
-          <div className="flex items-center my-4">
+          <div className="flex items-center my-4 lg:mt-8">
               <div className="flex flex-col w-full">
                   <div className="flex items-center justify-between">
                       <div className="flex w-full">
                                                   {post.author.avatar ? (<div
                             style={{backgroundImage: `url(${avatarUrl})`}}
                             className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
-                        ></div>) : (<svg className="mr-2 w-10 h-10 text-gray-300" viewBox="2.2 2 19.5 19.5"
+                        ></div>) : (<svg className="mr-2 w-10 h-10 text-zinc-400" viewBox="2.2 2 19.5 19.5"
                                          fill="currentColor"
                                          aria-hidden="true">
                                                       <path

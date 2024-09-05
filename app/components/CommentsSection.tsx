@@ -24,7 +24,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments, onAddCommen
                             style={{backgroundImage: `url(${avatarUrl})`}}
                             className="w-8 h-8 rounded-full bg-center border-slate-400 border bg-contain bg-no-repeat"
                         ></div>) : (
-                      <svg className="w-8 h-8 text-gray-300" viewBox="0 0 22 22" fill="currentColor"
+                      <svg className="w-8 h-8 text-zinc-400" viewBox="0 0 22 22" fill="currentColor"
                            aria-hidden="true">
                           <path
                               fillRule="evenodd"

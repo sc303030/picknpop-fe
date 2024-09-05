@@ -4,9 +4,9 @@ import Head from 'next/head';
 import Header from './components/Header';
 import { PostProvider } from './contexts/PostContext';
 import localFont from 'next/font/local';
-import TeamSidebar from "@/app/components/TeamSidebar";
-import Sidebar from "@/app/components/Sidebar";
 import { ModalProvider } from "@/app/components/ModalProvider";
+import { LayoutProvider, useLayoutContext } from '@/app/contexts/LayoutContext';
+import LayoutContainer from "@/app/components/LayoutContainer";
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -25,20 +25,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </Head>
       <body className={pretendard.className}>
         <PostProvider>
-          <ModalProvider>
-            <Header />
-            <div className="max-w-full m-auto px-4 py-2 grid grid-cols-1 gap-x-14 z-0 lg:max-w-custom lg:grid-cols-container relative">
-              <div className="lg:row-start-auto lg:w-full row-start-2">
-                <TeamSidebar />
-              </div>
-              <div className="py-4 min-w-0 lg:row-start-auto row-start-3">
-                {children}
-              </div>
-              <div className="lg:w-full lg:row-start-auto row-start-1">
-                <Sidebar />
-              </div>
-            </div>
-          </ModalProvider>
+          <LayoutProvider>
+            <ModalProvider>
+              <Header />
+              <LayoutContainer>{children}</LayoutContainer>
+            </ModalProvider>
+          </LayoutProvider>
         </PostProvider>
       </body>
     </html>

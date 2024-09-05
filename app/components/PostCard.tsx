@@ -1,8 +1,6 @@
 import React from 'react';
 import { PostCardProps } from "@/app/types";
 import {formatRelativeDate} from "@/app/utils/formatRelativeDate";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 const PostCard: React.FC<PostCardProps> = ({
     date,
     user,

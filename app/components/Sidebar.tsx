@@ -38,10 +38,12 @@ const Sidebar: React.FC = () => {
             onClick={() => handlePostClick(post.post_id)}
             className="rounded-xl bg-transparent py-1.5 px-2 items-center justify-between cursor-pointer transition-all duration-100 ease-out hover:bg-gray-50"
           >
-            <div className="w-full flex flex-row items-center">
-              <div className="mr-2">{index + 1}</div>
-              <div className="text-base font-medium mr-1.5 truncate">{post.title}</div>
-              <div className="text-sm text-gray-400 truncate">{post.content}</div>
+            <div className="w-full flex flex-row">
+              <div className="mr-2 text-gray-500 pt-0.5">{index + 1}</div>
+              <div className="flex flex-col">
+                <div className="text-base font-medium mr-1.5 truncate">{post.title}</div>
+                <div className="text-sm text-gray-400 truncate">{post.content}</div>
+              </div>
             </div>
           </a>
         ))}

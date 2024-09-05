@@ -1,13 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 import PostCard from './components/PostCard';
 import { usePostContext } from './contexts/PostContext';
+import { useLayoutContext } from './contexts/LayoutContext';
 
 export default function Page() {
   const { posts, setPosts } = usePostContext();
+  const { setHiddenRows } = useLayoutContext();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -22,6 +25,12 @@ export default function Page() {
 
     fetchPosts();
   }, [setPosts]);
+
+  useEffect(() => {
+    if (pathname.startsWith('/posts')) {
+      setHiddenRows(true);
+    }
+  }, [pathname, setHiddenRows]);
 
   const handlePostClick = (postId: number) => {
     router.push(`/posts/${postId}`);
