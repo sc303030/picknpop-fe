@@ -44,8 +44,8 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
         <div
             className="cursor-pointer transition-transform duration-200 rounded-2xl bg-white mt-2.5 flex p-5 w-[97%] ml-auto border-gray-400 border hover:bg-zinc-50 hover:shadow-lg hover:-translate-y-[2px]">
-            <div className="flex flex-row">
-                <div className="flex flex-col mr-7">
+            <div className="flex flex-row w-full">
+                <div className="flex flex-col mr-7 overflow-auto">
                     <div className="block mb-1">
                         <h2 className="text-2xl font-semibold">{title}</h2>
                     </div>
