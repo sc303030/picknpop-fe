@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
           >
             <div className="w-full flex flex-row">
               <div className="mr-2 text-gray-500 pt-0.5">{index + 1}</div>
-              <div className="flex flex-col">
+              <div className="flex flex-col overflow-auto">
                 <div className="text-base font-medium mr-1.5 truncate">{post.title}</div>
                 <div className="text-sm text-gray-400 truncate">{post.content}</div>
               </div>
@@ -62,11 +62,11 @@ const Sidebar: React.FC = () => {
         ))}
         <button
           onClick={toggleExpanded}
-          className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-500 focus:outline-none z-10 lg:hidden"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-gray-500 w-16 focus:outline-none z-10 lg:hidden"
         >
           <FontAwesomeIcon
             icon={expanded ? faAnglesUp : faAnglesDown}
-            className="transition-all duration-300 animate-bounce text-gray-500"
+            className="transition-all duration-300 animate-bounce"
           />
         </button>
         {!expanded && (
