@@ -66,7 +66,7 @@ const NewPostModal: React.FC<NewPostModalProps> = ({ show, onClose, onNewPost })
 
   return (
     <ModalLayout show={show} onClose={onClose}>
-      <div className="relative bg-white shadow-md flex flex-col w-full h-full md:rounded-3xl md:h-[570px] md:w-[700px]">
+      <div className="relative bg-white shadow-md flex flex-col w-full h-full md:rounded-3xl md:h-[580px] md:w-[700px]">
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-600 text-2xl md:right-[-2.5rem] md:top-0 md:text-white md:h-10 md:w-10 md:text-4xl">X</button>
         <div className="text-xl text-center px-7 pt-7 pb-3.5 flex flex-col">
           <strong>게시글 작성</strong>
