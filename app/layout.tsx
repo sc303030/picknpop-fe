@@ -6,7 +6,7 @@ import { PostProvider } from './contexts/PostContext';
 import localFont from 'next/font/local';
 import TeamSidebar from "@/app/components/TeamSidebar";
 import Sidebar from "@/app/components/Sidebar";
-import { ModalProvider } from "@/app/components/ModalProvider"; // 새로 만든 ModalProvider
+import { ModalProvider } from "@/app/components/ModalProvider";
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',

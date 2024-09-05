@@ -29,20 +29,17 @@ export default function Page() {
 
   return (
     <>
-        {posts.map((post, index) => (
-          <div
-            key={`${post.id}-${index}`}
-            onClick={() => handlePostClick(post.id)}
-          >
-            <PostCard
-              date={post.created_at}
-              user={post.author}
-              title={post.title}
-              content={post.content}
-              likes={post.likes}
-            />
-          </div>
-        ))}
+      {posts.map((post, index) => (
+        <div key={`${post.id}-${index}`} onClick={() => handlePostClick(post.id)}>
+          <PostCard
+            date={post.created_at}
+            user={post.author}
+            title={post.title}
+            content={post.content}
+            likes={post.likes}
+          />
+        </div>
+      ))}
     </>
   );
 }

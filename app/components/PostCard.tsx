@@ -22,7 +22,7 @@ const PostCard: React.FC<PostCardProps> = ({
                                 backgroundImage: `url(${avatarUrl})`,
                             }}
                             className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
-                        ></div>) : (<svg className="mr-2 w-10 h-10 text-gray-300" viewBox="2.2 2 19.5 19.5" fill="currentColor"
+                        ></div>) : (<svg className="mr-2 w-10 h-10 text-zinc-400" viewBox="2.2 2 19.5 19.5" fill="currentColor"
                                          aria-hidden="true">
                             <path
                                 fillRule="evenodd"
@@ -56,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({
                     </div>
                 </div>
                 <div className="flex flex-row justify-between items-center">
-                    <div className="text-sm font-medium flex flex-col items-center bg-[#ededed] rounded-2xl h-14 w-14 mx-auto my-auto">
+                    <div className="text-sm font-medium flex flex-col items-center bg-gray-200 rounded-2xl h-14 w-14 mx-auto my-auto">
                         <div className="mt-auto">❤️</div>
                         <div className="mb-auto">0</div>
                     </div>
