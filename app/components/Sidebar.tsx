@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
         ))}
         <button
           onClick={toggleExpanded}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-gray-500 w-16 focus:outline-none z-10 lg:hidden"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-gray-500 w-full focus:outline-none z-10 lg:hidden"
         >
           <FontAwesomeIcon
             icon={expanded ? faAnglesUp : faAnglesDown}
