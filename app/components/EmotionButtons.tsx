@@ -106,7 +106,7 @@ const EmotionButtons: React.FC<{ postId: number }> = ({ postId }) => {
   };
 
   return (
-    <div className="flex space-x-2">
+    <div className="flex flex-wrap gap-2.5">
       {emojiStates.map((emoji) => (
         <div
           key={emoji.id}

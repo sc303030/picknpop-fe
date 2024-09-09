@@ -4,13 +4,30 @@ import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import EmotionButtons from "@/app/components/EmotionButtons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser, faEye, faEyeDropperEmpty, faEyeLowVision, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import {getCookie} from "@/app/utils/cookies";
+import {jwtDecode} from 'jwt-decode';
+
+interface JwtPayload {
+  user_id: string;
+  exp: number;
+}
 
 
-
-const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
+const PostHeader: React.FC<PostHeaderProps> = ({ post}) => {
   const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${post.author.avatar}`;
-  const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm:ss', { locale: ko });
+  const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm', { locale: ko });
+  const getLoggedInUserId = (): string | null => {
+    const token = getCookie('token');
+    if (token) {
+      const decodedToken: JwtPayload = jwtDecode<JwtPayload>(token);
+      return decodedToken.user_id;
+    }
+    return null;
+};
+
+  const loggedInUserId = getLoggedInUserId();
+  const isAuthor = loggedInUserId !== null && post.author.id === parseInt(loggedInUserId, 10);
 
   return (
       <>
@@ -44,7 +61,20 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
               </div>
           </div>
           <div className="bg-white shadow rounded-2xl p-4 mb-4">
-              <div className="text-xl font-semibold mb-2">{post.title}</div>
+              <div className="flex flex-row justify-between">
+                  <div className="text-xl font-semibold mb-2">{post.title}</div>
+                  {isAuthor && (
+                    <div className="flex flex-row mb-2">
+                      <button className="bg-blue-100 text-blue-700 my-auto rounded-xl px-2 mr-2 hover:text-black hover:bg-blue-200">
+                        수정
+                      </button>
+                      <button className="bg-red-100 text-red-700 my-auto rounded-xl px-2 hover:text-black hover:bg-red-200">
+                        삭제
+                      </button>
+                    </div>
+                  )}
+              </div>
+
               <div className="flex justify-between items-center mb-4">
                   {post.content}
               </div>

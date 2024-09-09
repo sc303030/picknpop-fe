@@ -4,6 +4,8 @@ import apiCall from "@/app/utils/api";
 import { PostDetailProps, Post, Comment } from "@/app/types";
 import PostHeader from './PostHeader';
 import CommentsSection from './CommentsSection';
+import {getCookie} from "@/app/utils/cookies";
+import jwt_decode from "jwt-decode";
 
 const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -62,7 +64,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ postId, onClose }) => {
 
   return (
     <>
-      <PostHeader post={post} />
+      <PostHeader post={post}/>
       <CommentsSection comments={comments} onAddComment={handleAddComment} />
     </>
   );
