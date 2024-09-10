@@ -70,7 +70,7 @@ const Header: React.FC = () => {
   };
 
   const handleLogoClick = () => {
-    router.push('/');
+    window.location.href = '/';
   };
 
   const ProfileClick = (userId: number) => {

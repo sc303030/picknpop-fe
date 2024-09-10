@@ -9,7 +9,7 @@ interface PostBase {
 }
 export interface Post extends  PostBase{
   id: number;
-  team: string;
+  teams: { id: number }[];
   created_at: string;
   likes: string;
   author: User;
@@ -38,7 +38,9 @@ export interface Team {
 export interface NewPostModalProps {
   show: boolean;
   onClose: () => void;
-  onNewPost: (post: Post) => void;
+  onNewPost: (updatedPost: any) => void;
+  post?: Post | null;
+  isEdit: boolean;
 }
 
 export interface PostCardProps {
@@ -83,7 +85,8 @@ export interface LoginModalProps {
 export interface ModalContextProps {
   showSignupModal: () => void;
   showLoginModal: () => void;
-  showNewPostModal: () => void;
+  showNewPostModal: (post: Post) => void;
+  showDeletePostModal: (post: Post) => void;
   closeModals: () => void;
 }
 
@@ -97,4 +100,10 @@ export interface Emoji {
   label: string;
   count: number;
   voted: boolean;
+}
+
+export interface DeletePostModalProps {
+  show: boolean;
+  onClose: () => void;
+  post?: Post;
 }
