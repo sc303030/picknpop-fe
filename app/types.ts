@@ -85,8 +85,8 @@ export interface LoginModalProps {
 export interface ModalContextProps {
   showSignupModal: () => void;
   showLoginModal: () => void;
-  showNewPostModal: (post: Post) => void;
-  showDeletePostModal: (post: Post) => void;
+  showNewPostModal: (post?: Post) => void;
+  showDeletePostModal: (post?: Post) => void;
   closeModals: () => void;
 }
 
@@ -105,5 +105,5 @@ export interface Emoji {
 export interface DeletePostModalProps {
   show: boolean;
   onClose: () => void;
-  post?: Post;
+  post?: Post | null;
 }

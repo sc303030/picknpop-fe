@@ -84,7 +84,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
               </button>
               <button
                 className="text-sm bg-red-100 text-red-700 my-auto rounded-xl px-2.5 py-1 hover:text-black hover:bg-red-200"
-                onClick={() => showDeletePostModal(post)}  // 삭제 모달 열기
+                onClick={() => showDeletePostModal(post)}
               >
                 삭제
               </button>

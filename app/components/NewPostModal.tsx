@@ -4,7 +4,7 @@ import apiCall from '../utils/api';
 import ModalLayout from './ModalLayout';
 import { usePostContext } from '../contexts/PostContext';
 
-const NewPostModal: React.FC<NewPostModalProps & { post?: Post; isEdit?: boolean }> = ({
+const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: boolean }> = ({
   show,
   onClose,
   onNewPost,

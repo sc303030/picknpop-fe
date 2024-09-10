@@ -1,4 +1,5 @@
 'use client';
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
@@ -21,16 +22,19 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
   const [isDeletePostModalOpen, setDeletePostModalOpen] = useState(false);
-  const [currentPost, setCurrentPost] = useState<Post | undefined>(undefined);
+  const [currentPost, setCurrentPost] = useState<Post | null>(null); // null 허용
 
   const showSignupModal = () => setSignupModalOpen(true);
   const showLoginModal = () => setLoginModalOpen(true);
+
+  // post를 선택적으로 받도록 수정
   const showNewPostModal = (post?: Post) => {
-    setCurrentPost(post);
+    setCurrentPost(post || null);
     setNewPostModalOpen(true);
   };
+
   const showDeletePostModal = (post?: Post) => {
-    setCurrentPost(post);
+    setCurrentPost(post || null);
     setDeletePostModalOpen(true);
   };
 
@@ -39,7 +43,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setLoginModalOpen(false);
     setNewPostModalOpen(false);
     setDeletePostModalOpen(false);
-    setCurrentPost(undefined);
+    setCurrentPost(null);
   };
 
   return (
@@ -47,7 +51,13 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       {children}
       <SignupModal show={isSignupModalOpen} onClose={closeModals} />
       <LoginModal show={isLoginModalOpen} onClose={closeModals} onLoginSuccess={closeModals} />
-      <NewPostModal show={isNewPostModalOpen} onClose={closeModals} onNewPost={closeModals} post={currentPost} isEdit={!!currentPost} />
+      <NewPostModal
+        show={isNewPostModalOpen}
+        onClose={closeModals}
+        onNewPost={closeModals}
+        post={currentPost}
+        isEdit={!!currentPost}
+      />
       <DeletePostModal show={isDeletePostModalOpen} onClose={closeModals} post={currentPost} />
     </ModalContext.Provider>
   );
