@@ -19,7 +19,7 @@ const DeletePostModal: React.FC<DeletePostModalProps> = ({ show, onClose, post }
         if (response.ok) {
           alert('게시글이 삭제되었습니다.');
           onClose(); // 모달 닫기
-          window.location.reload(); // 페이지 리로드
+          window.location.href = '/';
         } else {
           throw new Error('게시글 삭제 실패');
         }

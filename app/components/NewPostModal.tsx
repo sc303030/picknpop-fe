@@ -101,7 +101,10 @@ const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: 
         setTitle('');
         setContent('');
         setSelectedTeams([]);
-        onClose(); // 모달 닫기
+        onClose();
+        if (isEdit){
+          window.location.reload();
+        }
       } else {
         throw new Error('게시글을 저장하는 중 문제가 발생했습니다.');
       }
