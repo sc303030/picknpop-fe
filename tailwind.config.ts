@@ -12,7 +12,7 @@ const config: Config = {
         'custom': '1340px',
       },
       gridTemplateColumns: {
-        'container': 'minmax(200px, 1fr) 3fr minmax(200px, 1fr)',
+        'container': 'minmax(170px, 170px) 3.2fr minmax(200px, 1fr)',
       },
       screens: {
         '1160': '1160px',
