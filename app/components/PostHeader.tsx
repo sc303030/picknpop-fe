@@ -15,7 +15,7 @@ interface JwtPayload {
 }
 
 const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
-  const { showNewPostModal, showDeletePostModal } = useModalContext();  // 삭제 모달 컨텍스트 사용
+  const { showNewPostModal, showDeletePostModal } = useModalContext();
   const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${post.author.avatar}`;
   const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm', { locale: ko });
 

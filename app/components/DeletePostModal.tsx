@@ -3,22 +3,20 @@ import ModalLayout from './ModalLayout';
 import {DeletePostModalProps, Post} from '../types'; // Post 타입 import
 import { getCookie } from '@/app/utils/cookies';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"; // 인증 헤더 처리
+import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import apiCall from "@/app/utils/api"; // 인증 헤더 처리
 
 const DeletePostModal: React.FC<DeletePostModalProps> = ({ show, onClose, post }) => {
   const handleDeletePost = async () => {
     if (post) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${post.id}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${getCookie('token')}`, // 인증 헤더
-          },
+        const response = await apiCall(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${post.id}`, {
+          method: 'PATCH'
         });
 
         if (response.ok) {
           alert('게시글이 삭제되었습니다.');
-          onClose(); // 모달 닫기
+          onClose();
           window.location.href = '/';
         } else {
           throw new Error('게시글 삭제 실패');

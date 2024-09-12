@@ -14,6 +14,11 @@ export default function PostPage({ params }: { params: { postId: string } }) {
       const fetchPost = async () => {
         try {
           const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${postId}`);
+          if (response.status === 404) {
+            alert('게시글이 존재하지 않습니다.');
+            router.push('/');
+            return;
+          }
           const data = await response.json();
           setPost(data);
         } catch (error) {
