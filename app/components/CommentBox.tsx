@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {CommentBoxProps} from "@/app/types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowUp} from "@fortawesome/free-solid-svg-icons";
+import {faComment} from "@fortawesome/free-regular-svg-icons";
 
 
 const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
@@ -24,8 +25,8 @@ const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} className="rounded-2xl my-8">
       <div className="flex items-start h-10">
         <div className="mr-3">
-          <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-            F
+          <div className="h-10 w-10 rounded-full bg-orange-600 flex items-center justify-center text-white font-bold">
+            <FontAwesomeIcon icon={faComment} className="text-xl"/>
           </div>
         </div>
         <div className="relative flex-1 h-10">

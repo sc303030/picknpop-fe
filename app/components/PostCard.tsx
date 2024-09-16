@@ -1,6 +1,8 @@
 import React from 'react';
 import { PostCardProps } from "@/app/types";
 import {formatRelativeDate} from "@/app/utils/formatRelativeDate";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faComment, faComments, faFaceSmile, faMessage} from '@fortawesome/free-regular-svg-icons';
 const PostCard: React.FC<PostCardProps> = ({
     date,
     user,
@@ -54,14 +56,20 @@ const PostCard: React.FC<PostCardProps> = ({
                     </div>
                 </div>
                 <div className="flex flex-row justify-between items-center">
-                    <div className="text-sm font-medium flex flex-col items-center bg-gray-200 rounded-2xl h-14 w-14 mx-auto my-auto">
-                        <div className="mt-auto">❤️</div>
-                        <div className="mb-auto">0</div>
+                    <div className="gap-2.5 text-gray-600 font-medium flex flex-row items-center bg-gray-200 rounded-2xl h-14 w-16 mx-auto my-auto justify-center">
+                        <div>
+                            <div className="mx-auto"><FontAwesomeIcon icon={faFaceSmile}/></div>
+                            <div className="text-center text-xs">0</div>
+                        </div>
+                        <div>
+                            <div className="mx-auto"><FontAwesomeIcon icon={faComments}/></div>
+                            <div className="text-center text-xs">0</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     );
 };
 
