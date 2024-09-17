@@ -56,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({
                         <p>{content}</p>
                     </div>
                 </div>
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-row justify-between items-center pr-4">
                     <div className="gap-2.5 text-gray-600 font-medium flex flex-row items-center bg-gray-200 rounded-2xl h-14 w-16 mx-auto my-auto justify-center">
                         <div>
                             <div className="mx-auto"><FontAwesomeIcon icon={faFaceSmile}/></div>
