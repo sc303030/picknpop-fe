@@ -8,7 +8,8 @@ const PostCard: React.FC<PostCardProps> = ({
     user,
     title,
     content,
-    likes
+    comment_count,
+    emotion_count
 }) => {
     const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${user.avatar}`;
     const relativeDate = formatRelativeDate(date);
@@ -59,11 +60,11 @@ const PostCard: React.FC<PostCardProps> = ({
                     <div className="gap-2.5 text-gray-600 font-medium flex flex-row items-center bg-gray-200 rounded-2xl h-14 w-16 mx-auto my-auto justify-center">
                         <div>
                             <div className="mx-auto"><FontAwesomeIcon icon={faFaceSmile}/></div>
-                            <div className="text-center text-xs">0</div>
+                            <div className="text-center text-xs">{emotion_count}</div>
                         </div>
                         <div>
                             <div className="mx-auto"><FontAwesomeIcon icon={faComments}/></div>
-                            <div className="text-center text-xs">0</div>
+                            <div className="text-center text-xs">{comment_count}</div>
                         </div>
                     </div>
                 </div>

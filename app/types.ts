@@ -14,6 +14,8 @@ export interface Post extends  PostBase{
   likes: string;
   author: User;
   views: number;
+  comment_count: number | 0;
+  emotion_count: number | 0;
 }
 
 export interface PostDetailProps {
@@ -48,7 +50,8 @@ export interface PostCardProps {
     user: User,
     title: string,
     content: string,
-    likes: string
+    comment_count: number;
+    emotion_count: number;
 }
 
 export interface User {
