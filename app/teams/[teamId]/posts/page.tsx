@@ -50,7 +50,8 @@ export default function PostsByTeam() {
             user={post.author}
             title={post.title}
             content={post.content}
-            likes={post.likes}
+            comment_count={post.comment_count}
+            emotion_count={post.emotion_count}
           />
         </div>
       ))}
