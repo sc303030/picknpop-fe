@@ -31,7 +31,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
         </div>
         <div className="relative flex-1 h-10">
           <textarea
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200 pr-12 h-10"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-orange-200 pr-12 h-10"
               rows={1}
               placeholder="댓글을 입력하세요."
               value={comment}
@@ -39,7 +39,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
           />
           <button
               type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 border shadow border-gray-400 w-7 h-7 rounded-full focus:outline-none hover:ring hover:ring-blue-200"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 border shadow border-gray-400 w-7 h-7 rounded-full focus:outline-none hover:ring hover:ring-orange-200"
           >
             <FontAwesomeIcon icon={faArrowUp} size="sm"/>
           </button>
