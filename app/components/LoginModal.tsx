@@ -69,7 +69,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
   return (
       <ModalLayout show={show} onClose={onClose}>
         <div className="relative bg-white p-8 shadow-md w-full h-full sm:rounded-2xl sm:w-96 sm:h-[70%]">
-          <button onClick={onClose} className="absolute top-2 right-2 text-gray-600">X</button>
+          <button onClick={onClose} className="text-2xl absolute top-2 right-2 text-gray-600">X</button>
           <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <img

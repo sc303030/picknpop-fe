@@ -162,7 +162,7 @@ const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: 
           </div>
         </div>
         <div className="flex flex-row justify-end p-4 border-t border-gray-200">
-          <button onClick={onClose} className="bg-white text-orange-500 mr-2 p-2 rounded-xl border border-orange-500 hover:bg-white md:hidden">
+          <button onClick={onClose} className="bg-white text-orange-500 mr-2 p-2 rounded-xl border border-orange-500 hover:bg-orange-50 md:hidden">
             뒤로가기
           </button>
           <button onClick={handlePost} className="bg-orange-500 text-white p-2 rounded-xl hover:bg-orange-300">
