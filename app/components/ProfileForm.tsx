@@ -6,8 +6,7 @@ import apiCall from "@/app/utils/api";
 const ProfileForm = () => {
   const [formData, setFormData] = useState({
     username: '',
-    nickname: '',
-    file: null as File | null,
+    nickname: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,7 +18,7 @@ const ProfileForm = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await apiCall(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/profile/`, {
+      const response = await apiCall(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/user/`, {
         method: 'GET'
       });
 
@@ -29,9 +28,8 @@ const ProfileForm = () => {
 
       const data = await response.json();
       setFormData({
-        username: data[0].username || '',
-        nickname: data[0].nickname || '',
-        file: null,
+        username: data.username || '',
+        nickname: data.nickname || ''
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
@@ -68,9 +66,6 @@ const ProfileForm = () => {
 
     const formDataToSend = new FormData();
     formDataToSend.append('nickname', formData.nickname);
-    if (formData.file) {
-      formDataToSend.append('avatar', formData.file);
-    }
 
     try {
       const response = await apiCall(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/profile/modify/`, {
@@ -114,7 +109,7 @@ const ProfileForm = () => {
                   id="username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="block select-none flex-1 border-0 focus:outline-none bg-transparent py-1.5 pl-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  className="block select-none flex-1 border-0 text-gray-500 focus:outline-none bg-transparent py-1.5 pl-1.5 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   disabled
                 />
               </div>
@@ -145,7 +140,7 @@ const ProfileForm = () => {
         </div>
       </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">취소하기</button>
+        <button type="button" className="rounded-md text-sm px-3 py-2 font-semibold text-orange-600 border border-orange-600 hover:bg-gray-100">취소하기</button>
         <button
           type="submit"
           className="rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"

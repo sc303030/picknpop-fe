@@ -21,7 +21,7 @@ export function deleteCookie(name: string) {
 }
 
 export async function refreshAccessToken(refreshToken: string): Promise<string> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/refresh/`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/token/refresh/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -11,33 +11,31 @@ interface SignupModalProps {
 
 const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
   const [nickname, setNickname] = useState('');
   const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [errors, setErrors] = useState({
     username: '',
-    password: '',
-    confirmPassword: '',
+    password1: '',
+    password2: '',
     nickname: '',
     terms: '',
   });
 
-  // State for toggling password visibility
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    setErrors({ username: '', password: '', confirmPassword: '', nickname: '', terms: '' });
+    setErrors({ username: '', password1: '', password2: '', nickname: '', terms: '' });
 
     // Check if passwords match before submitting
-    if (password !== confirmPassword) {
+    if (password1 !== password2) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        confirmPassword: '비밀번호가 일치하지 않습니다.',
+        password2: '비밀번호가 일치하지 않습니다.',
       }));
       return;
     }
@@ -51,14 +49,15 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
       return;
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/sign-up/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/registration/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username,
-        password,
+        password1,
+        password2,
         nickname,
       }),
     });
@@ -121,22 +120,22 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
                 </label>
                 <div className="relative mt-2">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword1 ? 'text' : 'password'}
                     id="password"
                     required
-                    value={password}
+                    value={password1}
                     placeholder="비밀번호"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setPassword1(e.target.value)}
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() => setShowPassword1(!showPassword1)}
                     className="absolute inset-y-0 right-2 flex items-center text-gray-500"
                   >
-                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                    <FontAwesomeIcon icon={showPassword1 ? faEye : faEyeSlash} />
                   </button>
-                  {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                  {errors.password1 && <p className="text-red-500 text-sm">{errors.password1}</p>}
                 </div>
               </div>
 
@@ -146,21 +145,13 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
                 </label>
                 <div className="relative mt-2">
                   <input
-                    type={showConfirmPassword ? 'text' : 'password'}
                     id="confirm-password"
                     required
-                    value={confirmPassword}
+                    value={password2}
                     placeholder="비밀번호 확인"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => setPassword2(e.target.value)}
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-2 flex items-center text-gray-500"
-                  >
-                  </button>
-                  {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
                 </div>
               </div>
 

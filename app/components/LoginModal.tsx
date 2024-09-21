@@ -11,7 +11,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/sign-in/`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
