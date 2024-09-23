@@ -24,10 +24,14 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [isDeletePostModalOpen, setDeletePostModalOpen] = useState(false);
   const [currentPost, setCurrentPost] = useState<Post | null>(null); // null 허용
 
-  const showSignupModal = () => setSignupModalOpen(true);
+  // 모달을 열고 닫는 함수
+  const showSignupModal = () => {
+    setLoginModalOpen(false); // 로그인 모달 닫기
+    setSignupModalOpen(true); // 회원가입 모달 열기
+  };
+
   const showLoginModal = () => setLoginModalOpen(true);
 
-  // post를 선택적으로 받도록 수정
   const showNewPostModal = (post?: Post) => {
     setCurrentPost(post || null);
     setNewPostModalOpen(true);
@@ -50,7 +54,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     <ModalContext.Provider value={{ showSignupModal, showLoginModal, showNewPostModal, showDeletePostModal, closeModals }}>
       {children}
       <SignupModal show={isSignupModalOpen} onClose={closeModals} />
-      <LoginModal show={isLoginModalOpen} onClose={closeModals} onLoginSuccess={closeModals} />
+      <LoginModal show={isLoginModalOpen} onClose={closeModals} onLoginSuccess={closeModals} openSignupModal={showSignupModal} />
       <NewPostModal
         show={isNewPostModalOpen}
         onClose={closeModals}

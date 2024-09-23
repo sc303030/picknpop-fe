@@ -83,6 +83,7 @@ export interface LoginModalProps {
   show: boolean;
   onClose: () => void;
   onLoginSuccess: () => void;
+  openSignupModal: () => void;
 }
 
 export interface ModalContextProps {
