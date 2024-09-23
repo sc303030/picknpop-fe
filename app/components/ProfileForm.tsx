@@ -12,10 +12,10 @@ const ProfileForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null); // 성공 메시지
-  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null); // 비밀번호 성공 메시지
-  const [passwordError, setPasswordError] = useState<string | null>(null); // 비밀번호 에러 메시지
+  const [error, setError] = useState<string | null>(null); // 프로필 수정 에러 메시지
+  const [success, setSuccess] = useState<string | null>(null); // 프로필 수정 성공 메시지
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null); // 비밀번호 수정 성공 메시지
+  const [passwordError, setPasswordError] = useState<string | null>(null); // 비밀번호 수정 에러 메시지
 
   // 프로필 데이터를 가져오는 함수
   const fetchProfileData = async () => {
@@ -27,7 +27,7 @@ const ProfileForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch profile data');
+        throw new Error('프로필 데이터를 불러오는 데 실패했습니다.');
       }
 
       const data = await response.json();
@@ -37,7 +37,7 @@ const ProfileForm = () => {
         nickname: data.nickname || '',
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
+      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
@@ -73,17 +73,18 @@ const ProfileForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update profile');
+        throw new Error('이미 존재하는 닉네임입니다.');
       }
 
-      setSuccess('프로필이 업데이트 되었습니다!');
+      setSuccess('프로필이 성공적으로 업데이트 되었습니다!');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
+      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
   };
 
+  // 비밀번호 변경 처리
   const handlePasswordChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -104,12 +105,12 @@ const ProfileForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to change password');
+        throw new Error('비밀번호 변경에 실패했습니다.');
       }
 
       setPasswordSuccess('비밀번호가 성공적으로 변경되었습니다.');
     } catch (err) {
-      setPasswordError(err instanceof Error ? err.message : 'An unknown error occurred');
+      setPasswordError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
