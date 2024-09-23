@@ -45,6 +45,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
             value={comment}
             onChange={handleInputChange}
             disabled={!isLoggedIn}
+            required
           />
           {isLoggedIn && (
             <button

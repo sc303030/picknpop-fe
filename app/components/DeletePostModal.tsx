@@ -1,10 +1,9 @@
 import React from 'react';
 import ModalLayout from './ModalLayout';
-import {DeletePostModalProps, Post} from '../types'; // Post 타입 import
-import { getCookie } from '@/app/utils/cookies';
+import {DeletePostModalProps} from '../types';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-import apiCall from "@/app/utils/api"; // 인증 헤더 처리
+import apiCall from "@/app/utils/api";
 
 const DeletePostModal: React.FC<DeletePostModalProps> = ({ show, onClose, post }) => {
   const handleDeletePost = async () => {

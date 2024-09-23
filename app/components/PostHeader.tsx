@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PostHeaderProps } from '@/app/types';
+import {JwtPayload, PostHeaderProps} from '@/app/types';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import EmotionButtons from "@/app/components/EmotionButtons";
@@ -9,14 +9,9 @@ import { getCookie } from "@/app/utils/cookies";
 import { jwtDecode } from 'jwt-decode';
 import { useModalContext } from '@/app/components/ModalProvider';
 
-interface JwtPayload {
-  user_id: string;
-  exp: number;
-}
 
 const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
   const { showNewPostModal, showDeletePostModal } = useModalContext();
-  const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${post.author.avatar}`;
   const formattedDate = format(parseISO(post.created_at), 'yyyy년 M월 d일 HH:mm', { locale: ko });
 
   const getLoggedInUserId = (): string | null => {
@@ -37,13 +32,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-between">
             <div className="flex w-full">
-              {post.author.avatar ? (
-                <div
-                  style={{ backgroundImage: `url(${avatarUrl})` }}
-                  className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
-                ></div>
-              ) : (
-                <svg
+              <svg
                   className="mr-2 w-10 h-10 text-zinc-400"
                   viewBox="2.2 2 19.5 19.5"
                   fill="currentColor"
@@ -55,7 +44,6 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                     clipRule="evenodd"
                   />
                 </svg>
-              )}
               <div className="flex flex-col text-sm">
                 <div className="flex items-center my-auto">
                   <span className="text-lg font-medium text-black-500 mr-2">

@@ -11,7 +11,6 @@ const PostCard: React.FC<PostCardProps> = ({
     comment_count,
     emotion_count
 }) => {
-    const avatarUrl = `${process.env.NEXT_PUBLIC_USER_API_URL}/media/${user.avatar}`;
     const relativeDate = formatRelativeDate(date);
     return (
         <div className="mb-4 mt-8">

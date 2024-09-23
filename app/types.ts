@@ -71,6 +71,8 @@ export interface CommentBoxProps {
 export interface CommentsSectionProps {
   comments: Comment[];
   onAddComment: (comment: string) => void;
+  onDeleteComment: (comment: number) => void;
+  currentUserId: number | null;
 }
 
 export interface ModalLayoutProps {
@@ -110,4 +112,9 @@ export interface DeletePostModalProps {
   show: boolean;
   onClose: () => void;
   post?: Post | null;
+}
+
+export interface JwtPayload {
+  user_id: string;
+  exp: number;
 }
