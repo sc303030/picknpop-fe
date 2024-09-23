@@ -18,12 +18,7 @@ const PostCard: React.FC<PostCardProps> = ({
             <div className="flex flex-col w-full">
                 <div className="flex items-center justify-between">
                     <div className="flex w-full">
-                        {user.avatar ? (<div
-                            style={{
-                                backgroundImage: `url(${avatarUrl})`,
-                            }}
-                            className="w-10 h-10 rounded-full bg-center mr-2 border-slate-400 border bg-contain bg-no-repeat"
-                        ></div>) : (<svg className="mr-2 w-10 h-10 text-zinc-400" viewBox="2.2 2 19.5 19.5" fill="currentColor"
+                        <svg className="mr-2 w-10 h-10 text-zinc-400" viewBox="2.2 2 19.5 19.5" fill="currentColor"
                                          aria-hidden="true">
                             <path
                                 fillRule="evenodd"
@@ -31,8 +26,6 @@ const PostCard: React.FC<PostCardProps> = ({
                                 clipRule="evenodd"
                             />
                         </svg>
-                    )}
-
                     <div className="flex flex-col text-sm">
                         <div className="flex items-center">
                             <span className="text-black-500 font-semibold mr-0.5">{user.nickname}</span>
