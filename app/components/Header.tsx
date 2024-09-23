@@ -1,26 +1,30 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useModalContext } from '@/app/components/ModalProvider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserLarge } from "@fortawesome/free-solid-svg-icons/faUserLarge";
 import { faBell, faPen } from "@fortawesome/free-solid-svg-icons";
 import { getCookie, deleteCookie } from "@/app/utils/token";
-import {faPenToSquare} from "@fortawesome/free-regular-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
 const Header: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname(); // Get current route
   const { showSignupModal, showLoginModal, showNewPostModal } = useModalContext();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true); // New loading state to track token check
   const [hideHeader, setHideHeader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Check for token and update isLoggedIn state
   useEffect(() => {
     const token = getCookie('token');
     if (token) {
       setIsLoggedIn(true);
     }
+    setLoading(false); // Set loading to false after token check is complete
   }, []);
 
   useEffect(() => {
@@ -77,6 +81,10 @@ const Header: React.FC = () => {
     router.push(`/profile`);
   };
 
+  if (loading) {
+    return null; // Render nothing while loading (waiting for token check)
+  }
+
   return (
     <>
       <nav className={`transform transition-transform duration-300 ease-out backdrop-blur-sm ${hideHeader ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'} shadow-sm sticky top-0 z-[1] w-full bg-white/90 border-b-0`}>
@@ -89,7 +97,6 @@ const Header: React.FC = () => {
             </div>
             {isLoggedIn ? (
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                 <button
                   onClick={() => showNewPostModal()}
                   className="hidden sm:flex mr-1.5 p-1 bg-white border border-orange-600 text-sm rounded-full font-normal text-center w-auto cursor-pointer leading-4 text-orange-600 hover:bg-orange-600 hover:text-white"
@@ -147,7 +154,7 @@ const Header: React.FC = () => {
         </div>
       </nav>
 
-      {isLoggedIn && (
+      {isLoggedIn && pathname !== '/profile' && (
         <div className="z-10 fixed bottom-6 right-6 sm:hidden">
           <button
             onClick={() => showNewPostModal()}

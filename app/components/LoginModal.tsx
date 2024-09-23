@@ -108,11 +108,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess }
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                       비밀번호<span className="pl-1 text-red-800">*</span>
                     </label>
-                    <div className="text-sm">
-                      <a href="#" className="font-semibold text-orange-600 hover:text-orange-400">
-                        비밀번호 찾기
-                      </a>
-                    </div>
                   </div>
                   <div className="mt-2">
                     <input

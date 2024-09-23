@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import apiCall from "@/app/utils/api";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 const ProfileForm = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +19,10 @@ const ProfileForm = () => {
   const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null); // 비밀번호 수정 성공 메시지
   const [passwordError, setPasswordError] = useState<string | null>(null); // 비밀번호 수정 에러 메시지
 
-  // 프로필 데이터를 가져오는 함수
+  // State for toggling password visibility
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
   const fetchProfileData = async () => {
     setLoading(true);
     setError(null);
@@ -47,7 +52,6 @@ const ProfileForm = () => {
     fetchProfileData();
   }, []);
 
-  // 입력 변화 처리
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -56,7 +60,6 @@ const ProfileForm = () => {
     });
   };
 
-  // 프로필 수정 처리
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -84,7 +87,6 @@ const ProfileForm = () => {
     }
   };
 
-  // 비밀번호 변경 처리
   const handlePasswordChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -132,19 +134,15 @@ const ProfileForm = () => {
                 이메일
               </label>
               <div className="mt-2">
-                <div
-                  className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-orange-600"
-                >
-                  <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    className="block w-full py-1.5 pl-1.5 rounded-md border-0 shadow-sm text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    disabled
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="block w-full py-1.5 rounded-md border-0 shadow-sm text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  disabled
+                />
               </div>
             </div>
 
@@ -153,21 +151,16 @@ const ProfileForm = () => {
                 닉네임
               </label>
               <div className="mt-2">
-                <div
-                  className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-orange-600"
-                >
-                  <input
-                    type="text"
-                    name="nickname"
-                    id="nickname"
-                    autoComplete="nickname"
-                    value={formData.nickname}
-                    onChange={handleChange}
-                    className="block w-full py-1.5 pl-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="닉네임을 입력해주세요."
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="nickname"
+                  id="nickname"
+                  value={formData.nickname}
+                  onChange={handleChange}
+                  className="block w-full py-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
+                  placeholder="닉네임을 입력해주세요."
+                  required
+                />
               </div>
             </div>
           </div>
@@ -195,16 +188,23 @@ const ProfileForm = () => {
               <label htmlFor="currentPassword" className="block text-sm font-medium leading-6 text-gray-900">
                 현재 비밀번호
               </label>
-              <div className="mt-2">
+              <div className="relative mt-2">
                 <input
-                  type="password"
+                  type={showCurrentPassword ? 'text' : 'password'}
                   name="currentPassword"
                   id="currentPassword"
                   value={formData.currentPassword}
                   onChange={handleChange}
-                  className="block w-full py-1.5 pl-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
+                  className="block w-full py-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
                   placeholder="현재 비밀번호를 입력하세요."
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                >
+                  <FontAwesomeIcon icon={showCurrentPassword ? faEye : faEyeSlash} />
+                </button>
               </div>
             </div>
 
@@ -212,16 +212,23 @@ const ProfileForm = () => {
               <label htmlFor="newPassword" className="block text-sm font-medium leading-6 text-gray-900">
                 새 비밀번호
               </label>
-              <div className="mt-2">
+              <div className="relative mt-2">
                 <input
-                  type="password"
+                  type={showNewPassword ? 'text' : 'password'}
                   name="newPassword"
                   id="newPassword"
                   value={formData.newPassword}
                   onChange={handleChange}
-                  className="block w-full py-1.5 pl-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
+                  className="block w-full py-1.5 rounded-md border-0 shadow-sm focus:ring-0 sm:text-sm sm:leading-6"
                   placeholder="새 비밀번호를 입력하세요."
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                >
+                  <FontAwesomeIcon icon={showNewPassword ? faEye : faEyeSlash} />
+                </button>
               </div>
             </div>
           </div>
