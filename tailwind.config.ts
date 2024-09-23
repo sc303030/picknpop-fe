@@ -18,6 +18,9 @@ const config: Config = {
         '1160': '1160px',
         '660' : '660px'
       },
+      fontFamily:{
+        schoolbell: ["var(--schoolbell)"],
+      }
     },
   },
   plugins: [],

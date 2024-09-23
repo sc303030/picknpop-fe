@@ -73,16 +73,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess, 
       <form onSubmit={handleLogin} className="relative bg-white p-8 shadow-md w-full h-full sm:rounded-2xl sm:w-96 sm:h-[70%]">
         <button onClick={onClose} type="button" className="text-2xl absolute top-2 right-2 text-gray-600">X</button>
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=600"
-              alt="Your Company"
-              width={40}
-              height={40}
-            />
+          <div className="text-center font-schoolbell text-orange-600 text-4xl sm:mx-auto sm:w-full sm:max-w-sm">
+            picknpop
           </div>
-
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="space-y-6">
               <div>

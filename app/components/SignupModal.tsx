@@ -84,14 +84,8 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
       <div className="relative bg-white p-8 shadow-md w-full h-full sm:rounded-2xl sm:w-96 sm:h-auto">
         <button onClick={onClose} className="text-2xl absolute top-2 right-2 text-gray-600">X</button>
         <form className="flex min-h-full flex-col justify-center px-6 lg:px-8" onSubmit={handleSubmit}>
-          <div className="flex flex-row sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=600"
-              alt="Your Company"
-              width={20}
-              height={20}
-            />
+          <div className="text-center font-schoolbell text-orange-600 text-3xl sm:mx-auto sm:w-full sm:max-w-sm">
+            picknpop
           </div>
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="space-y-2">

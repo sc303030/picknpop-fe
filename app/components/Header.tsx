@@ -92,7 +92,7 @@ const Header: React.FC = () => {
           <div className="relative flex h-full items-center justify-between">
             <div className="flex flex-1 items-center sm:items-stretch">
               <div className="flex flex-shrink-0 items-center pl-1">
-                <div className="text-2xl font-medium cursor-pointer" onClick={handleLogoClick}>픽앤팝</div>
+                <div className="font-schoolbell text-3xl font-medium cursor-pointer pb-0.5 text-orange-600" onClick={handleLogoClick}>picknpop</div>
               </div>
             </div>
             {isLoggedIn ? (
