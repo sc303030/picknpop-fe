@@ -113,15 +113,14 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
                 </div>
               </div>
 
-              {/* Password Field */}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="password1" className="block text-sm font-medium leading-6 text-gray-900">
                   비밀번호<span className="pl-1 text-red-800">*</span>
                 </label>
                 <div className="relative mt-2">
                   <input
                     type={showPassword1 ? 'text' : 'password'}
-                    id="password"
+                    id="password1"
                     required
                     value={password1}
                     placeholder="비밀번호"
@@ -140,12 +139,13 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
               </div>
 
               <div>
-                <label htmlFor="confirm-password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="password2" className="block text-sm font-medium leading-6 text-gray-900">
                   비밀번호 확인<span className="pl-1 text-red-800">*</span>
                 </label>
                 <div className="relative mt-2">
                   <input
-                    id="confirm-password"
+                    type="password"
+                    id="password2"
                     required
                     value={password2}
                     placeholder="비밀번호 확인"
