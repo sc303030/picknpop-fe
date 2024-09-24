@@ -111,23 +111,25 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
                 <label htmlFor="password1" className="block text-sm font-medium leading-6 text-gray-900">
                   비밀번호<span className="pl-1 text-red-800">*</span>
                 </label>
-                <div className="relative mt-2">
-                  <input
-                    type={showPassword1 ? 'text' : 'password'}
-                    id="password1"
-                    required
-                    value={password1}
-                    placeholder="비밀번호"
-                    onChange={(e) => setPassword1(e.target.value)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword1(!showPassword1)}
-                    className="absolute inset-y-0 right-2 flex items-center text-gray-500"
-                  >
-                    <FontAwesomeIcon icon={showPassword1 ? faEye : faEyeSlash} />
-                  </button>
+                <div className="mt-2">
+                  <div className="relative">
+                    <input
+                      type={showPassword1 ? 'text' : 'password'}
+                      id="password1"
+                      required
+                      value={password1}
+                      placeholder="비밀번호"
+                      onChange={(e) => setPassword1(e.target.value)}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword1(!showPassword1)}
+                      className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                    >
+                      <FontAwesomeIcon icon={showPassword1 ? faEye : faEyeSlash} />
+                    </button>
+                  </div>
                   {errors.password1 && <p className="text-red-500 text-sm">{errors.password1}</p>}
                 </div>
               </div>
