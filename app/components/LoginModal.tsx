@@ -3,17 +3,24 @@ import ModalLayout from './ModalLayout';
 import { isTokenExpired, refreshAccessToken } from '../utils/token';
 import { setCookie, getCookie, deleteCookie } from '../utils/cookies';
 import { LoginModalProps } from '@/app/types';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faEyeSlash} from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess, openSignupModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
+    // Reset error messages
+    setUsernameError('');
+    setPasswordError('');
+    setErrorMessage('');
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/accounts/login/`, {
         method: 'POST',
@@ -25,25 +32,37 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess, 
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || errorData.detail || '로그인 실패');
+
+        // 에러 메시지 설정
+        let hasError = false;
+        if (errorData.username) {
+          setUsernameError('해당 아이디를 찾을 수 없습니다.');
+          hasError = true;
+        }
+        if (errorData.password) {
+          setPasswordError('비밀번호가 틀렸습니다.');
+          hasError = true;
+        }
+
+        // usernameError나 passwordError가 설정되지 않은 경우에만 일반 에러 메시지 설정
+        if (!hasError) {
+          setErrorMessage('알 수 없는 오류가 발생했습니다.');
+        }
+        return; // 더 이상 진행하지 않음
       }
 
       const data = await response.json();
-
-      setCookie('token', data.access, 1); // access token 저장
-      setCookie('refresh_token', data.refresh, 7); // refresh token은 7일간 유효
+      setCookie('token', data.access, 1);
+      setCookie('refresh_token', data.refresh, 7);
 
       onLoginSuccess();
       onClose();
       window.location.reload();
     } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage('알 수 없는 오류가 발생했습니다.');
-      }
+      setErrorMessage('알 수 없는 오류가 발생했습니다.');
     }
   };
+
 
   useEffect(() => {
     const checkTokenExpiry = async () => {
@@ -92,9 +111,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess, 
                     required
                     onChange={(e) => setUsername(e.target.value)}
                     className={`block w-full focus:outline-none rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 ${
-                      errorMessage && 'border-red-500'
+                      usernameError ? 'border-red-500' : ''
                     }`}
                   />
+                  {usernameError && <p className="text-red-500 text-sm mt-1">{usernameError}</p>}
                 </div>
               </div>
 
@@ -104,25 +124,28 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onLoginSuccess, 
                     비밀번호<span className="pl-1 text-red-800">*</span>
                   </label>
                 </div>
-                <div className="relative mt-2">
-                  <input
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      required
-                      value={password}
-                      placeholder="비밀번호"
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={`block w-full focus:outline-none rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 ${
-                          errorMessage && 'border-red-500'
-                      }`}
-                  />
-                  <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-2 flex items-center text-gray-500"
-                  >
-                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash}/>
-                  </button>
+                <div className="mt-2">
+                  <div className="relative">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        autoComplete="current-password"
+                        required
+                        value={password}
+                        placeholder="비밀번호"
+                        onChange={(e) => setPassword(e.target.value)}
+                        className={`block w-full focus:outline-none rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 ${
+                          passwordError ? 'border-red-500' : ''
+                        }`}
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                    >
+                      <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                    </button>
+                  </div>
+                  {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
                 </div>
               </div>
 
