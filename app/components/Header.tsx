@@ -82,7 +82,7 @@ const Header: React.FC = () => {
   };
 
   if (loading) {
-    return null; // Render nothing while loading (waiting for token check)
+    return null;
   }
 
   return (

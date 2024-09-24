@@ -3,6 +3,7 @@ import { Team, NewPostModalProps, Post } from '../types';
 import apiCall from '../utils/api';
 import ModalLayout from './ModalLayout';
 import { usePostContext } from '../contexts/PostContext';
+import {useRouter} from 'next/navigation';
 
 const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: boolean }> = ({
   show,
@@ -18,6 +19,7 @@ const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: 
   const [selectedTeams, setSelectedTeams] = useState<number[]>([]);
   const { posts, setPosts } = usePostContext();
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   // 모달이 열릴 때 post 데이터로 제목과 내용을 초기화
   useEffect(() => {
@@ -102,6 +104,9 @@ const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: 
         setContent('');
         setSelectedTeams([]);
         onClose();
+        if(!isEdit){
+          router.push(`/posts/${updatedPost.id}`);
+        }
         if (isEdit){
           window.location.reload();
         }
