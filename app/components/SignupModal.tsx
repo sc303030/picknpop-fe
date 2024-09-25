@@ -64,6 +64,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
 
     if (response.ok) {
       onClose();
+      alert("회원가입 성공!");
     } else {
       const data = await response.json();
       setErrors(data);

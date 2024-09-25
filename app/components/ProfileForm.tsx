@@ -133,7 +133,7 @@ const ProfileForm = () => {
   };
 
   const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+    const confirmDelete = window.confirm('정말 탈퇴하시겠습니까?');
 
     if (!confirmDelete) {
       return;
@@ -144,9 +144,9 @@ const ProfileForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('계정 삭제에 실패했습니다.');
+        throw new Error('탈퇴에 실패했습니다.');
       }
-      alert("계정이 성공적으로 삭제되었습니다.");
+      alert("성공적으로 탈퇴하였습니다.");
       deleteCookie('token');
       window.location.href = '/';
     } catch (err) {
