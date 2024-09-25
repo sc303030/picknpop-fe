@@ -75,11 +75,17 @@ const ProfileForm = () => {
         body: formDataToSend,
       });
 
-      if (!response.ok) {
-        throw new Error('이미 존재하는 닉네임입니다.');
-      }
+      const data = await response.json();
 
-      setSuccess('프로필이 성공적으로 업데이트 되었습니다!');
+      if (response.ok) {
+        setSuccess('프로필이 성공적으로 업데이트 되었습니다!');
+      } else {
+        if (data.nickname) {
+          setError(data.nickname);
+        } else {
+          setError('알 수 없는 오류가 발생했습니다.');
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
     } finally {
@@ -106,11 +112,19 @@ const ProfileForm = () => {
         body: JSON.stringify(passwordData),
       });
 
-      if (!response.ok) {
-        throw new Error('비밀번호 변경에 실패했습니다.');
-      }
+      const data = await response.json();
 
-      setPasswordSuccess('비밀번호가 성공적으로 변경되었습니다.');
+      if (response.ok) {
+        setPasswordSuccess('비밀번호가 성공적으로 변경되었습니다.');
+      } else {
+        if (data.new_password2) {
+          setPasswordError(data.new_password2);
+        }else if (data.old_password) {
+          setPasswordError(data.old_password);
+        } else {
+          setPasswordError('알 수 없는 오류가 발생했습니다.');
+        }
+      }
     } catch (err) {
       setPasswordError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
     } finally {
@@ -150,7 +164,6 @@ const ProfileForm = () => {
             <h2 className="text-base font-semibold leading-7 text-gray-900">프로필 수정</h2>
 
             {loading && <p>Loading...</p>}
-            {error && <p className="text-red-500">{error}</p>}
             {success && <p className="text-green-500">{success}</p>}
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8">
@@ -186,6 +199,7 @@ const ProfileForm = () => {
                       placeholder="닉네임을 입력해주세요."
                       required
                   />
+                  {error && <p className="text-red-500">{error}</p>}
                 </div>
               </div>
             </div>
@@ -215,6 +229,7 @@ const ProfileForm = () => {
                 </label>
                 <div className="relative mt-2">
                   <input
+                      required
                       type={showCurrentPassword ? 'text' : 'password'}
                       name="currentPassword"
                       id="currentPassword"
@@ -239,6 +254,7 @@ const ProfileForm = () => {
                 </label>
                 <div className="relative mt-2">
                   <input
+                      required
                       type={showNewPassword ? 'text' : 'password'}
                       name="newPassword"
                       id="newPassword"
