@@ -46,7 +46,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                 </svg>
               <div className="flex flex-col text-sm">
                 <div className="flex items-center my-auto">
-                  <span className="text-lg font-medium text-black-500 mr-2">
+                  <span className="font-medium text-black-500 mr-2">
                     {post.author.nickname}
                   </span>
                   <span className="text-gray-500 mr-1"> · {formattedDate} · </span>
@@ -61,7 +61,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
 
       <div className="bg-white shadow rounded-2xl p-4 mb-4">
         <div className="flex flex-row justify-between w-full">
-          <div className="text-xl font-semibold mb-2 w-[60%] overflow-auto">{post.title}</div>
+          <div className="text-xl font-semibold mb-2 w-[60%] overflow-auto whitespace-normal break-words">{post.title}</div>
           {isAuthor && (
             <div className="flex flex-row mb-2">
               <button
@@ -80,7 +80,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
           )}
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="justify-between items-center mb-4 overflow-auto whitespace-normal break-words">
           {post.content}
         </div>
         <EmotionButtons postId={post.id} />
