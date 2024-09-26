@@ -55,7 +55,7 @@ const Sidebar: React.FC = () => {
     <div className="mt-8 sticky top-[100px] flex flex-col">
       <div className="mb-3.5 leading-4 flex items-center">
         <div className="text-sm font-medium">🔥 실시간 인기글</div>
-        <div className="text-sm text-gray-500 mr-2">{currentTime} 기준</div>
+        <div className="text-xs text-gray-500 ml-2">{currentTime} 기준</div>
       </div>
       <div
         className={`flex flex-col overflow-hidden p-1 rounded-2xl bg-white relative transition-[max-height] ease-in-out ${
