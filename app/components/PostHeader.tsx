@@ -45,13 +45,15 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
                   />
                 </svg>
               <div className="flex flex-col text-sm">
-                <div className="flex items-center my-auto">
+                <div className="flex my-auto">
                   <span className="font-medium text-black-500 mr-2">
                     {post.author.nickname}
                   </span>
                   <span className="text-gray-500 mr-1"> · {formattedDate} · </span>
-                  <FontAwesomeIcon icon={faEye} className="text-gray-500 mr-1" />
-                  <span className="text-gray-500">{post.views}</span>
+                  <div className="flex flex-row items-center">
+                    <FontAwesomeIcon icon={faEye} className="text-gray-500 mr-1" />
+                    <span className="text-gray-500">{post.views}</span>
+                  </div>
                 </div>
               </div>
             </div>
