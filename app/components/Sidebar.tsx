@@ -9,6 +9,7 @@ import { faAnglesDown, faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 const Sidebar: React.FC = () => {
   const [popularPosts, setPopularPosts] = useState<PopularPost[]>([]);
   const [expanded, setExpanded] = useState(false); // 슬라이드 상태 관리
+  const [currentTime, setCurrentTime] = useState(''); // 현재 시간 상태 관리
   const router = useRouter();
 
   useEffect(() => {
@@ -25,6 +26,23 @@ const Sidebar: React.FC = () => {
     fetchPopularPosts();
   }, []);
 
+  // 현재 시간 갱신을 위한 useEffect
+  useEffect(() => {
+    const updateCurrentTime = () => {
+      const now = new Date();
+      const formattedTime = now.toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      setCurrentTime(formattedTime);
+    };
+
+    updateCurrentTime(); // 처음 마운트 될 때 시간 설정
+    const intervalId = setInterval(updateCurrentTime, 60000); // 1분마다 갱신
+
+    return () => clearInterval(intervalId); // 언마운트 시 인터벌 제거
+  }, []);
+
   const handlePostClick = (postId: number) => {
     router.push(`/posts/${postId}`);
   };
@@ -35,8 +53,9 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className="mt-8 sticky top-[100px] flex flex-col">
-      <div className="mb-3.5 leading-4 flex justify-between items-center">
+      <div className="mb-3.5 leading-4 flex items-center">
         <div className="text-sm font-medium">🔥 실시간 인기글</div>
+        <div className="text-sm text-gray-500 mr-2">{currentTime} 기준</div>
       </div>
       <div
         className={`flex flex-col overflow-hidden p-1 rounded-2xl bg-white relative transition-[max-height] ease-in-out ${
