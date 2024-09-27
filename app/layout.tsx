@@ -9,6 +9,7 @@ import { LayoutProvider, useLayoutContext } from '@/app/contexts/LayoutContext';
 import LayoutContainer from "@/app/components/LayoutContainer";
 import {Schoolbell} from "next/font/google";
 import {Metadata} from "next";
+import Footer from "./components/Footer";
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <ModalProvider>
               <Header />
               <LayoutContainer>{children}</LayoutContainer>
+              <Footer />
             </ModalProvider>
           </LayoutProvider>
         </PostProvider>
