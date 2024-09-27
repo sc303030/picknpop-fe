@@ -33,7 +33,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
           <div className="flex items-center justify-between">
             <div className="flex w-full">
               <svg
-                  className="mr-2 w-10 h-10 text-zinc-400"
+                  className="mr-2 w-7 h-7 lg:w-10 lg:h-10 text-zinc-400"
                   viewBox="2.2 2 19.5 19.5"
                   fill="currentColor"
                   aria-hidden="true"

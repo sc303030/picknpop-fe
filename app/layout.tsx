@@ -27,6 +27,7 @@ const cls = (...classnames: string[]) => {
   return classnames.join(" ");
 };
 
+
 export const metadata: Metadata = {
 	title: "picknpop",
     description: "농구 전문 소셜 네트워크 픽앤팝",
