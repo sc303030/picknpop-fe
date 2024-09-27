@@ -31,7 +31,7 @@ export default function Page() {
     };
 
     fetchPosts();
-  }, [page, page]);
+  }, [page]);
 
   useEffect(() => {
     if (pathname.startsWith('/posts')) {
@@ -44,6 +44,12 @@ export default function Page() {
   };
 
   const totalPages = Math.ceil(totalPosts / postsPerPage);  // 전체 페이지 수 계산
+
+  // 10개씩 끊어서 페이지네이션 표시
+  const pageGroupSize = 10;
+  const currentGroup = Math.ceil(page / pageGroupSize);
+  const startPage = (currentGroup - 1) * pageGroupSize + 1;
+  const endPage = Math.min(currentGroup * pageGroupSize, totalPages);
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -59,6 +65,18 @@ export default function Page() {
 
   const handlePageClick = (pageNum: number) => {
     setPage(pageNum);
+  };
+
+  const handleNextGroup = () => {
+    if (endPage < totalPages) {
+      setPage(endPage + 1);
+    }
+  };
+
+  const handlePrevGroup = () => {
+    if (startPage > 1) {
+      setPage(startPage - 1);
+    }
   };
 
   return (
@@ -81,38 +99,40 @@ export default function Page() {
         <div className="flex flex-1 items-center justify-center">
           <div>
             <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              {/* 이전 페이지 그룹 */}
               <button
-                onClick={handlePrevPage}
-                disabled={page === 1}
+                onClick={handlePrevGroup}
+                disabled={startPage === 1}
                 className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
-                <span className="sr-only">Previous</span>
+                <span className="sr-only">Previous Group</span>
                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
                 </svg>
               </button>
 
               {/* 페이지 번호 */}
-              {Array.from({ length: totalPages }, (_, i) => (
+              {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
                 <button
-                  key={i + 1}
-                  onClick={() => handlePageClick(i + 1)}
+                  key={startPage + i}
+                  onClick={() => handlePageClick(startPage + i)}
                   className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                    page === i + 1
+                    page === startPage + i
                       ? 'z-10 bg-orange-600 text-white'
                       : 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
                   }`}
                 >
-                  {i + 1}
+                  {startPage + i}
                 </button>
               ))}
 
+              {/* 다음 페이지 그룹 */}
               <button
-                onClick={handleNextPage}
-                disabled={page === totalPages}
+                onClick={handleNextGroup}
+                disabled={endPage === totalPages}
                 className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
-                <span className="sr-only">Next</span>
+                <span className="sr-only">Next Group</span>
                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                 </svg>
