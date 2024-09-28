@@ -31,7 +31,6 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
 
     setErrors({ username: '', password1: '', password2: '', nickname: '', terms: '' });
 
-    // Check if passwords match before submitting
     if (password1 !== password2) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -150,6 +149,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   />
                 </div>
+                {errors.password2 && <p className="text-red-500 text-sm">{errors.password2}</p>}
               </div>
 
               <div>

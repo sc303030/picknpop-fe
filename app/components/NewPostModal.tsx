@@ -72,7 +72,7 @@ const NewPostModal: React.FC<NewPostModalProps & { post?: Post | null; isEdit?: 
 
     try {
       const apiUrl = isEdit
-        ? `${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${post?.id}/`
+        ? `${process.env.NEXT_PUBLIC_POST_API_URL}/posts/${post?.id}`
         : `${process.env.NEXT_PUBLIC_POST_API_URL}/posts/`;
 
       const method = isEdit ? 'PUT' : 'POST';
