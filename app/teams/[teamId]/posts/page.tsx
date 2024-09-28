@@ -20,7 +20,7 @@ export default function PostsByTeam() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/teams/${teamId}/posts?skip=${(page - 1) * postsPerPage}&limit=${postsPerPage}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_POST_API_URL}/teams/${teamId}/posts/?skip=${(page - 1) * postsPerPage}&limit=${postsPerPage}`);
         const data = await response.json();
         setPosts(data.posts);
         setTotalPosts(data.total_count);

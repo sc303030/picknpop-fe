@@ -20,7 +20,7 @@ export default function Page() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_POST_API_URL}/posts?skip=${(page - 1) * postsPerPage}&limit=${postsPerPage}`
+          `${process.env.NEXT_PUBLIC_POST_API_URL}/posts/?skip=${(page - 1) * postsPerPage}&limit=${postsPerPage}`
         );
         const data = await response.json();
         setPosts(data.posts);
