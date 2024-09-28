@@ -13,7 +13,7 @@ const TeamSidebar: React.FC = () => {
     const fetchTeams = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_POST_API_URL}/teams/`,
+          `${process.env.NEXT_PUBLIC_POST_API_URL}/teams`,
         );
         const data = await response.json();
         setTeams(data);
