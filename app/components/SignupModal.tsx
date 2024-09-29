@@ -14,7 +14,6 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [nickname, setNickname] = useState('');
-  const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [errors, setErrors] = useState({
     username: '',
@@ -40,7 +39,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
     }
 
     // Check if the user has agreed to both conditions
-    if (!agreeToPrivacy || !agreeToTerms) {
+    if (!agreeToTerms) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         terms: '필수 동의 사항에 체크해주세요.',
@@ -71,9 +70,6 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
   };
 
   // Handle Link Clicks and Checkbox Updates
-  const handlePrivacyClick = () => {
-    setAgreeToPrivacy(true);
-  };
 
   const handleTermsClick = () => {
     setAgreeToTerms(true);
@@ -171,30 +167,6 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onClose }) => {
               </div>
 
               {/* Privacy Policy Checkbox */}
-              <div className="pt-3">
-                <label className="inline-flex items-center relative">
-                  <input
-                    type="checkbox"
-                    checked={agreeToPrivacy}
-                    onChange={(e) => setAgreeToPrivacy(e.target.checked)}
-                    className="form-checkbox text-orange-600 peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-orange-600 checked:border-orange-600"
-                  />
-                  <span
-                    className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-[10px] transform -translate-x-1/2 -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"
-                         stroke="currentColor" strokeWidth="1">
-                      <path fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"></path>
-                    </svg>
-                  </span>
-                  <span className="ml-2 text-sm font-medium text-gray-500">
-                    <Link href="/privacy-policy" className="cursor-pointer underline mr-1" target="_blank" rel="noopener noreferrer" onClick={handlePrivacyClick}>개인정보 수집 및 이용동의</Link>
-                    <span className="text-orange-600">(필수)</span>
-                  </span>
-                </label>
-              </div>
-
               <div className="pt-3">
                 <label className="inline-flex items-center relative">
                   <input
