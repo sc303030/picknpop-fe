@@ -63,7 +63,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
 
       <div className="bg-white shadow rounded-2xl p-4 mb-4">
         <div className="flex flex-row justify-between w-full">
-          <div className="text-xl font-semibold mb-2 w-[60%] overflow-auto whitespace-normal break-words">{post.title}</div>
+          <div className={`text-xl font-semibold mb-2 ${isAuthor ? 'w-[60%]' : 'w-full'} overflow-auto whitespace-normal break-words`}>{post.title}</div>
           {isAuthor && (
             <div className="flex flex-row mb-2">
               <button
